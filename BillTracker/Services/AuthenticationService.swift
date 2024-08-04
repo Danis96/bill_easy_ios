@@ -113,4 +113,5 @@ extension AuthenticationManager {
         let authDataResult = try await Auth.auth().signIn(with: credentials)
         return AuthDataResultModel(user: authDataResult.user)
     }
+    
 }

@@ -9,7 +9,17 @@ import SwiftUI
 
 struct WelcomeView: View {
     var body: some View {
-        Text("Hello, World!")
+        getStartedView
+    }
+}
+
+extension WelcomeView {
+    private var getStartedView: some View {
+        NavigationLink {
+            SignInView()
+        } label: {
+            Text("Go to login")
+        }
     }
 }
 

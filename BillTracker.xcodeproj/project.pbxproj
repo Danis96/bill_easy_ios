@@ -22,6 +22,10 @@
 		435195C22C4AFB2900758018 /* AuthenticationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435195C12C4AFB2900758018 /* AuthenticationService.swift */; };
 		435195C52C4AFBA700758018 /* GoogleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435195C42C4AFBA700758018 /* GoogleSignInHelper.swift */; };
 		435195C72C4AFC8B00758018 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 435195C62C4AFC8B00758018 /* GoogleService-Info.plist */; };
+		43C466D92C5FF10300D335E4 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466D82C5FF10300D335E4 /* SignInView.swift */; };
+		43C466DC2C5FF58A00D335E4 /* TextFieldReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466DB2C5FF58A00D335E4 /* TextFieldReusable.swift */; };
+		43C466DE2C5FF6E700D335E4 /* TextLocalizationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466DD2C5FF6E700D335E4 /* TextLocalizationUtility.swift */; };
+		43C466E02C5FF78000D335E4 /* TextFieldPasswordReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466DF2C5FF78000D335E4 /* TextFieldPasswordReusable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +40,10 @@
 		435195C42C4AFBA700758018 /* GoogleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInHelper.swift; sourceTree = "<group>"; };
 		435195C62C4AFC8B00758018 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		435195C82C4AFCA400758018 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		43C466D82C5FF10300D335E4 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		43C466DB2C5FF58A00D335E4 /* TextFieldReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldReusable.swift; sourceTree = "<group>"; };
+		43C466DD2C5FF6E700D335E4 /* TextLocalizationUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLocalizationUtility.swift; sourceTree = "<group>"; };
+		43C466DF2C5FF78000D335E4 /* TextFieldPasswordReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPasswordReusable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +110,7 @@
 		435195B32C4AF97D00758018 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				43C466D72C5FF0F100D335E4 /* LoginView */,
 				435195B82C4AF9B600758018 /* WelcomeView */,
 			);
 			path = Views;
@@ -125,6 +134,7 @@
 			isa = PBXGroup;
 			children = (
 				435195BC2C4AFA3D00758018 /* Utilities.swift */,
+				43C466DD2C5FF6E700D335E4 /* TextLocalizationUtility.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -132,6 +142,7 @@
 		435195B72C4AF99700758018 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				43C466DA2C5FF57600D335E4 /* TextFields */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -166,6 +177,23 @@
 				435195C42C4AFBA700758018 /* GoogleSignInHelper.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		43C466D72C5FF0F100D335E4 /* LoginView */ = {
+			isa = PBXGroup;
+			children = (
+				43C466D82C5FF10300D335E4 /* SignInView.swift */,
+			);
+			path = LoginView;
+			sourceTree = "<group>";
+		};
+		43C466DA2C5FF57600D335E4 /* TextFields */ = {
+			isa = PBXGroup;
+			children = (
+				43C466DB2C5FF58A00D335E4 /* TextFieldReusable.swift */,
+				43C466DF2C5FF78000D335E4 /* TextFieldPasswordReusable.swift */,
+			);
+			path = TextFields;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,10 +280,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				435195BD2C4AFA3D00758018 /* Utilities.swift in Sources */,
+				43C466D92C5FF10300D335E4 /* SignInView.swift in Sources */,
 				435195C02C4AFA9600758018 /* PreviewProvider.swift in Sources */,
 				435195BA2C4AF9C700758018 /* WelcomeView.swift in Sources */,
 				4351956C2C4AF2EB00758018 /* BillTrackerApp.swift in Sources */,
+				43C466E02C5FF78000D335E4 /* TextFieldPasswordReusable.swift in Sources */,
+				43C466DE2C5FF6E700D335E4 /* TextLocalizationUtility.swift in Sources */,
 				435195C52C4AFBA700758018 /* GoogleSignInHelper.swift in Sources */,
+				43C466DC2C5FF58A00D335E4 /* TextFieldReusable.swift in Sources */,
 				435195C22C4AFB2900758018 /* AuthenticationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
