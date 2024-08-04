@@ -26,6 +26,9 @@
 		43C466DC2C5FF58A00D335E4 /* TextFieldReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466DB2C5FF58A00D335E4 /* TextFieldReusable.swift */; };
 		43C466DE2C5FF6E700D335E4 /* TextLocalizationUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466DD2C5FF6E700D335E4 /* TextLocalizationUtility.swift */; };
 		43C466E02C5FF78000D335E4 /* TextFieldPasswordReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466DF2C5FF78000D335E4 /* TextFieldPasswordReusable.swift */; };
+		43C466E32C6018B300D335E4 /* ButtonWideReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466E22C6018B300D335E4 /* ButtonWideReusable.swift */; };
+		43C466E52C6019D300D335E4 /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466E42C6019D300D335E4 /* UIHelpers.swift */; };
+		43C466E72C601F7B00D335E4 /* AppleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466E62C601F7B00D335E4 /* AppleSignInHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +47,9 @@
 		43C466DB2C5FF58A00D335E4 /* TextFieldReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldReusable.swift; sourceTree = "<group>"; };
 		43C466DD2C5FF6E700D335E4 /* TextLocalizationUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextLocalizationUtility.swift; sourceTree = "<group>"; };
 		43C466DF2C5FF78000D335E4 /* TextFieldPasswordReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldPasswordReusable.swift; sourceTree = "<group>"; };
+		43C466E22C6018B300D335E4 /* ButtonWideReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWideReusable.swift; sourceTree = "<group>"; };
+		43C466E42C6019D300D335E4 /* UIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = "<group>"; };
+		43C466E62C601F7B00D335E4 /* AppleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +148,7 @@
 		435195B72C4AF99700758018 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				43C466E12C60189E00D335E4 /* Buttons */,
 				43C466DA2C5FF57600D335E4 /* TextFields */,
 			);
 			path = Components;
@@ -175,6 +182,8 @@
 			isa = PBXGroup;
 			children = (
 				435195C42C4AFBA700758018 /* GoogleSignInHelper.swift */,
+				43C466E42C6019D300D335E4 /* UIHelpers.swift */,
+				43C466E62C601F7B00D335E4 /* AppleSignInHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -194,6 +203,14 @@
 				43C466DF2C5FF78000D335E4 /* TextFieldPasswordReusable.swift */,
 			);
 			path = TextFields;
+			sourceTree = "<group>";
+		};
+		43C466E12C60189E00D335E4 /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				43C466E22C6018B300D335E4 /* ButtonWideReusable.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -282,10 +299,13 @@
 				435195BD2C4AFA3D00758018 /* Utilities.swift in Sources */,
 				43C466D92C5FF10300D335E4 /* SignInView.swift in Sources */,
 				435195C02C4AFA9600758018 /* PreviewProvider.swift in Sources */,
+				43C466E52C6019D300D335E4 /* UIHelpers.swift in Sources */,
 				435195BA2C4AF9C700758018 /* WelcomeView.swift in Sources */,
 				4351956C2C4AF2EB00758018 /* BillTrackerApp.swift in Sources */,
 				43C466E02C5FF78000D335E4 /* TextFieldPasswordReusable.swift in Sources */,
 				43C466DE2C5FF6E700D335E4 /* TextLocalizationUtility.swift in Sources */,
+				43C466E72C601F7B00D335E4 /* AppleSignInHelper.swift in Sources */,
+				43C466E32C6018B300D335E4 /* ButtonWideReusable.swift in Sources */,
 				435195C52C4AFBA700758018 /* GoogleSignInHelper.swift in Sources */,
 				43C466DC2C5FF58A00D335E4 /* TextFieldReusable.swift in Sources */,
 				435195C22C4AFB2900758018 /* AuthenticationService.swift in Sources */,
