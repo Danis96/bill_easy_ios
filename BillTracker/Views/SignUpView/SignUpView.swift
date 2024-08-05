@@ -1,15 +1,15 @@
 //
-//  SignInView.swift
+//  SignUpView.swift
 //  BillTracker
 //
-//  Created by Danis Preldzic on 4. 8. 2024..
+//  Created by Danis Preldzic on 5. 8. 2024..
 //
 
 import SwiftUI
 import GoogleSignInSwift
 import SwiftfulRouting
 
-struct SignInView: View {
+struct SignUpView: View {
     
     @State private var textEmailString: String = ""
     @State private var textPassString: String = ""
@@ -18,7 +18,7 @@ struct SignInView: View {
     @Environment(\.router) var router
     
     var body: some View {
-        VStack() {
+        VStack {
             VStack(alignment: .leading) {
                 spacerHeight(height: 40)
                 headlineView
@@ -33,8 +33,8 @@ struct SignInView: View {
             }
             .padding(.horizontal, 20)
             spacerHeight(height: 20)
-            ButtonWideReusable(buttonTitle: "Login", iconTrailing: "arrow.right",  buttonWidth: 350) {
-                
+            ButtonWideReusable(buttonTitle: "Join BillTracker!", iconTrailing: "arrow.right",  buttonWidth: 350) {
+               
             }
             spacerHeight(height: 25)
             socialMediaTextDivider
@@ -47,34 +47,41 @@ struct SignInView: View {
         }
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-              toolbarItemNavigationSignUpView
+                toolbarItemNavigationSignUpView
             }
         }
     }
 }
 
 
-extension SignInView {
+extension SignUpView {
     private var headlineView: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(TextLocalizationUtility.logn_headline)
+            Text("Sign Up")
                 .font(.largeTitle)
                 .bold()
-            Text(TextLocalizationUtility.login_subheadline)
+            Text("Welcome to BillTracker!")
         }
     }
     
     private var toolbarItemNavigationSignUpView: some View {
+       
         Button(action: {
             router.showScreen(.push) { _ in
-                SignUpView()
+                SignInView()
             }
         }, label: {
-            Text(TextLocalizationUtility.login_toolbar_trailing)
+            Text("Login")
                 .font(.headline)
                 .fontWeight(.semibold)
                 .foregroundStyle(.black)
         })
+        
+//        NavigationLink {
+//           
+//        } label: {
+//            
+//        }
     }
     
     private var textFieldEmailView: some View {
@@ -86,43 +93,42 @@ extension SignInView {
     }
     
     private var forgotPasswordComponentView: some View {
-        
-        Button(action: {
-//            router.showScreen(.push, destination: )
-        }, label: {
+        NavigationLink {
+            Text("Forgot password")
+        } label: {
             Text(TextLocalizationUtility.login_forgot_password)
                 .font(.subheadline)
                 .foregroundStyle(.gray)
                 .underline()
-        })
+        }
     }
     
     private var socialMediaTextDivider: some View {
-        Text("or login with social account")
+        Text("or sign up with social account")
             .font(.subheadline)
     }
-
+    
     private var googleSignInButtonView: some View {
         GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .dark, style: .wide, state: .normal)) {
-//            Task {
-//                do {
-//                  
-//                } catch {
-//                    print(error)
-//                }
-//            }
+            //            Task {
+            //                do {
+            //
+            //                } catch {
+            //                    print(error)
+            //                }
+            //            }
         }
     }
     
     private var appleSignInButtonView: some View {
         Button(action: {
-//            Task {
-//                do {
-//                   
-//                } catch {
-//                    print(error)
-//                }
-//            }
+            //            Task {
+            //                do {
+            //
+            //                } catch {
+            //                    print(error)
+            //                }
+            //            }
         }, label: {
             SignInWithAppleButtonViewRepresentable(type: .signIn, style: .black)
                 .allowsHitTesting(false)
@@ -133,6 +139,6 @@ extension SignInView {
 
 #Preview {
     RouterView { _ in
-        SignInView()
+        SignUpView()
     }
 }

@@ -29,6 +29,9 @@
 		43C466E32C6018B300D335E4 /* ButtonWideReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466E22C6018B300D335E4 /* ButtonWideReusable.swift */; };
 		43C466E52C6019D300D335E4 /* UIHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466E42C6019D300D335E4 /* UIHelpers.swift */; };
 		43C466E72C601F7B00D335E4 /* AppleSignInHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466E62C601F7B00D335E4 /* AppleSignInHelper.swift */; };
+		43C466EA2C615F7200D335E4 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466E92C615F7200D335E4 /* SignUpView.swift */; };
+		43C466EC2C6161B400D335E4 /* NavigationExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C466EB2C6161B400D335E4 /* NavigationExtenstions.swift */; };
+		43C466F02C61687900D335E4 /* SwiftfulRouting in Frameworks */ = {isa = PBXBuildFile; productRef = 43C466EF2C61687900D335E4 /* SwiftfulRouting */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,8 @@
 		43C466E22C6018B300D335E4 /* ButtonWideReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonWideReusable.swift; sourceTree = "<group>"; };
 		43C466E42C6019D300D335E4 /* UIHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIHelpers.swift; sourceTree = "<group>"; };
 		43C466E62C601F7B00D335E4 /* AppleSignInHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInHelper.swift; sourceTree = "<group>"; };
+		43C466E92C615F7200D335E4 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		43C466EB2C6161B400D335E4 /* NavigationExtenstions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationExtenstions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +63,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				435195B02C4AF96D00758018 /* GoogleSignIn in Frameworks */,
+				43C466F02C61687900D335E4 /* SwiftfulRouting in Frameworks */,
 				435195872C4AF81000758018 /* FirebaseAuth in Frameworks */,
 				435195932C4AF81000758018 /* FirebaseFirestoreSwift in Frameworks */,
 				435195B22C4AF96D00758018 /* GoogleSignInSwift in Frameworks */,
@@ -88,6 +94,7 @@
 		4351956A2C4AF2EB00758018 /* BillTracker */ = {
 			isa = PBXGroup;
 			children = (
+				43C466ED2C61684F00D335E4 /* Routing */,
 				435195C82C4AFCA400758018 /* Info.plist */,
 				4351956B2C4AF2EB00758018 /* BillTrackerApp.swift */,
 				435195B52C4AF98E00758018 /* Models */,
@@ -116,6 +123,7 @@
 		435195B32C4AF97D00758018 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				43C466E82C615F5C00D335E4 /* SignUpView */,
 				43C466D72C5FF0F100D335E4 /* LoginView */,
 				435195B82C4AF9B600758018 /* WelcomeView */,
 			);
@@ -174,6 +182,7 @@
 			isa = PBXGroup;
 			children = (
 				435195BF2C4AFA9600758018 /* PreviewProvider.swift */,
+				43C466EB2C6161B400D335E4 /* NavigationExtenstions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -181,9 +190,9 @@
 		435195C32C4AFB8D00758018 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				43C466E62C601F7B00D335E4 /* AppleSignInHelper.swift */,
 				435195C42C4AFBA700758018 /* GoogleSignInHelper.swift */,
 				43C466E42C6019D300D335E4 /* UIHelpers.swift */,
-				43C466E62C601F7B00D335E4 /* AppleSignInHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -213,6 +222,21 @@
 			path = Buttons;
 			sourceTree = "<group>";
 		};
+		43C466E82C615F5C00D335E4 /* SignUpView */ = {
+			isa = PBXGroup;
+			children = (
+				43C466E92C615F7200D335E4 /* SignUpView.swift */,
+			);
+			path = SignUpView;
+			sourceTree = "<group>";
+		};
+		43C466ED2C61684F00D335E4 /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Routing;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -236,6 +260,7 @@
 				435195922C4AF81000758018 /* FirebaseFirestoreSwift */,
 				435195AF2C4AF96D00758018 /* GoogleSignIn */,
 				435195B12C4AF96D00758018 /* GoogleSignInSwift */,
+				43C466EF2C61687900D335E4 /* SwiftfulRouting */,
 			);
 			productName = BillTracker;
 			productReference = 435195682C4AF2EB00758018 /* BillTracker.app */;
@@ -268,6 +293,7 @@
 			packageReferences = (
 				435195792C4AF81000758018 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				435195AE2C4AF96D00758018 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				43C466EE2C61687900D335E4 /* XCRemoteSwiftPackageReference "SwiftfulRouting" */,
 			);
 			productRefGroup = 435195692C4AF2EB00758018 /* Products */;
 			projectDirPath = "";
@@ -301,11 +327,13 @@
 				435195C02C4AFA9600758018 /* PreviewProvider.swift in Sources */,
 				43C466E52C6019D300D335E4 /* UIHelpers.swift in Sources */,
 				435195BA2C4AF9C700758018 /* WelcomeView.swift in Sources */,
+				43C466EC2C6161B400D335E4 /* NavigationExtenstions.swift in Sources */,
 				4351956C2C4AF2EB00758018 /* BillTrackerApp.swift in Sources */,
 				43C466E02C5FF78000D335E4 /* TextFieldPasswordReusable.swift in Sources */,
 				43C466DE2C5FF6E700D335E4 /* TextLocalizationUtility.swift in Sources */,
 				43C466E72C601F7B00D335E4 /* AppleSignInHelper.swift in Sources */,
 				43C466E32C6018B300D335E4 /* ButtonWideReusable.swift in Sources */,
+				43C466EA2C615F7200D335E4 /* SignUpView.swift in Sources */,
 				435195C52C4AFBA700758018 /* GoogleSignInHelper.swift in Sources */,
 				43C466DC2C5FF58A00D335E4 /* TextFieldReusable.swift in Sources */,
 				435195C22C4AFB2900758018 /* AuthenticationService.swift in Sources */,
@@ -536,6 +564,14 @@
 				minimumVersion = 7.1.0;
 			};
 		};
+		43C466EE2C61687900D335E4 /* XCRemoteSwiftPackageReference "SwiftfulRouting" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SwiftfulThinking/SwiftfulRouting.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.3.5;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -568,6 +604,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 435195AE2C4AF96D00758018 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignInSwift;
+		};
+		43C466EF2C61687900D335E4 /* SwiftfulRouting */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 43C466EE2C61687900D335E4 /* XCRemoteSwiftPackageReference "SwiftfulRouting" */;
+			productName = SwiftfulRouting;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

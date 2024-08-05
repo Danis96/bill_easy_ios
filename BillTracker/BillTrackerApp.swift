@@ -7,6 +7,7 @@
 
 import SwiftUI
 import FirebaseCore
+import SwiftfulRouting
 
 @main
 struct BillTrackerApp: App {
@@ -15,8 +16,8 @@ struct BillTrackerApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationStack {
-                WelcomeView()
+            RouterView { _ in
+                SignInView()
             }
         }
     }

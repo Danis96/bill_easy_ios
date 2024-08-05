@@ -30,3 +30,9 @@ struct RoundedCornersCustom: Shape {
         return path
     }
 }
+
+func spacerHeight(height: Double) -> some View {
+    Rectangle()
+        .frame(height: height)
+        .foregroundStyle(.windowBackground)
+}
