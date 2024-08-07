@@ -13,7 +13,9 @@ import SwiftfulRouting
 struct BillTrackerApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    // MARK: View Models Registration
     @StateObject private var authenticationVM = AuthenticationViewModel()
+    @StateObject private var onboardingVM = OnboardingViewModel()
     
     var body: some Scene {
         WindowGroup {
@@ -21,6 +23,7 @@ struct BillTrackerApp: App {
                RootView()
             }
             .environmentObject(authenticationVM)
+            .environmentObject(onboardingVM)
         }
     }
 }

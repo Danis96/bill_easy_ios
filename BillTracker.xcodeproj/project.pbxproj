@@ -39,6 +39,9 @@
 		43C467032C628AE800D335E4 /* ButtonReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C467022C628AE800D335E4 /* ButtonReusable.swift */; };
 		43C467052C634E3800D335E4 /* RouteGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C467042C634E3800D335E4 /* RouteGenerator.swift */; };
 		43C4670A2C6354DE00D335E4 /* ForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C467092C6354DE00D335E4 /* ForgotPasswordView.swift */; };
+		43C4670D2C63781C00D335E4 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C4670C2C63781C00D335E4 /* OnboardingView.swift */; };
+		43C4670F2C63786500D335E4 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C4670E2C63786500D335E4 /* OnboardingViewModel.swift */; };
+		43C467112C638D8100D335E4 /* RadioButtonReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C467102C638D8100D335E4 /* RadioButtonReusable.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +72,9 @@
 		43C467022C628AE800D335E4 /* ButtonReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonReusable.swift; sourceTree = "<group>"; };
 		43C467042C634E3800D335E4 /* RouteGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteGenerator.swift; sourceTree = "<group>"; };
 		43C467092C6354DE00D335E4 /* ForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordView.swift; sourceTree = "<group>"; };
+		43C4670C2C63781C00D335E4 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		43C4670E2C63786500D335E4 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		43C467102C638D8100D335E4 /* RadioButtonReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonReusable.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +144,7 @@
 		435195B32C4AF97D00758018 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				43C4670B2C63780C00D335E4 /* OnboardingView */,
 				43C467082C6354CB00D335E4 /* ForgotPasswordView */,
 				43C466FF2C62891A00D335E4 /* HomeView */,
 				43C466F82C6205F900D335E4 /* SuccessView */,
@@ -151,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				43C466F12C61FE3600D335E4 /* AuthenticationViewModel.swift */,
+				43C4670E2C63786500D335E4 /* OnboardingViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -230,6 +238,7 @@
 			children = (
 				43C466E22C6018B300D335E4 /* ButtonWideReusable.swift */,
 				43C467022C628AE800D335E4 /* ButtonReusable.swift */,
+				43C467102C638D8100D335E4 /* RadioButtonReusable.swift */,
 			);
 			path = Buttons;
 			sourceTree = "<group>";
@@ -272,6 +281,14 @@
 				43C467092C6354DE00D335E4 /* ForgotPasswordView.swift */,
 			);
 			path = ForgotPasswordView;
+			sourceTree = "<group>";
+		};
+		43C4670B2C63780C00D335E4 /* OnboardingView */ = {
+			isa = PBXGroup;
+			children = (
+				43C4670C2C63781C00D335E4 /* OnboardingView.swift */,
+			);
+			path = OnboardingView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -375,11 +392,14 @@
 				43C467012C62892A00D335E4 /* HomeView.swift in Sources */,
 				43C466EA2C615F7200D335E4 /* SignUpView.swift in Sources */,
 				43C467052C634E3800D335E4 /* RouteGenerator.swift in Sources */,
+				43C467112C638D8100D335E4 /* RadioButtonReusable.swift in Sources */,
 				435195C52C4AFBA700758018 /* GoogleSignInHelper.swift in Sources */,
 				43C466DC2C5FF58A00D335E4 /* TextFieldReusable.swift in Sources */,
 				435195C22C4AFB2900758018 /* AuthenticationService.swift in Sources */,
+				43C4670F2C63786500D335E4 /* OnboardingViewModel.swift in Sources */,
 				43C466F72C61FF2800D335E4 /* UserModel.swift in Sources */,
 				43C467032C628AE800D335E4 /* ButtonReusable.swift in Sources */,
+				43C4670D2C63781C00D335E4 /* OnboardingView.swift in Sources */,
 				43C466F52C61FE9700D335E4 /* UserService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

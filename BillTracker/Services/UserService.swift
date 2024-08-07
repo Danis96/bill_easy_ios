@@ -22,13 +22,11 @@ final class UserManager {
     
     private let encoder: Firestore.Encoder = {
         let encoder = Firestore.Encoder()
-        //        encoder.keyEncodingStrategy = .convertToSnakeCase
         return encoder
     }()
     
     private let decoder: Firestore.Decoder = {
         let decoder = Firestore.Decoder()
-        //        decoder.keyDecodingStrategy = .convertFromSnakeCase
         return decoder
     }()
     
@@ -40,41 +38,47 @@ final class UserManager {
         try await userDocument(userID: userID).getDocument(as: DBUser.self)
     }
     
-//    func updateUserPremiumStatus(userID: String, isPremium: Bool) async throws {
-//        let data: [String : Any] = [
-//            DBUser.CodingKeys.isPremium.rawValue: isPremium
-//        ]
-//        try await userDocument(userID: userID).updateData(data)
-//    }
-//    
-//    func addUserPreferences(userID: String, preference: String) async throws {
-//        let data: [String : Any] = [
-//            DBUser.CodingKeys.preferences.rawValue: FieldValue.arrayUnion([preference])
-//        ]
-//        try await userDocument(userID: userID).updateData(data)
-//    }
-//    
-//    func removeUserPreferences(userID: String, preference: String) async throws {
-//        let data: [String : Any] = [
-//            DBUser.CodingKeys.preferences.rawValue: FieldValue.arrayRemove([preference])
-//        ]
-//        try await userDocument(userID: userID).updateData(data)
-//    }
-//    
-//    func addMovie(userID: String, movie: Movie) async throws {
-//        guard let data = try? encoder.encode(movie) else { throw URLError(.badURL) }
-//        
-//        let dict: [String : Any] = [
-//            DBUser.CodingKeys.favouriteMovie.rawValue: data
-//        ]
-//        try await userDocument(userID: userID).updateData(dict)
-//    }
-//    
-//    func removeMovie(userID: String, movie: Movie) async throws {
-//        let data: [String : Any?] = [
-//            DBUser.CodingKeys.favouriteMovie.rawValue: nil
-//        ]
-//        try await userDocument(userID: userID).updateData(data as [AnyHashable : Any])
-//    }
+    func updateUserData(userID: String, user: DBUser) async throws {
+        
+        let dict: [String : Any] = [
+            DBUser.CodingKeys.firstName.rawValue: user.firstName ?? "",
+            DBUser.CodingKeys.lastName.rawValue: user.lastName ?? "",
+            DBUser.CodingKeys.address.rawValue: user.address ?? "",
+            DBUser.CodingKeys.finishedOnboarding.rawValue: user.finishedOnboarding ?? true,
+            DBUser.CodingKeys.dob.rawValue: user.dob,
+            DBUser.CodingKeys.gender.rawValue: user.gender ?? 0
+        ]
+        try await userDocument(userID: userID).updateData(dict)
+    }
+    //
+    //    func addUserPreferences(userID: String, preference: String) async throws {
+    //        let data: [String : Any] = [
+    //            DBUser.CodingKeys.preferences.rawValue: FieldValue.arrayUnion([preference])
+    //        ]
+    //        try await userDocument(userID: userID).updateData(data)
+    //    }
+    //
+    //    func removeUserPreferences(userID: String, preference: String) async throws {
+    //        let data: [String : Any] = [
+    //            DBUser.CodingKeys.preferences.rawValue: FieldValue.arrayRemove([preference])
+    //        ]
+    //        try await userDocument(userID: userID).updateData(data)
+    //    }
+    //
+    //    func addMovie(userID: String, movie: Movie) async throws {
+    //        guard let data = try? encoder.encode(movie) else { throw URLError(.badURL) }
+    //
+    //        let dict: [String : Any] = [
+    //            DBUser.CodingKeys.favouriteMovie.rawValue: data
+    //        ]
+    //        try await userDocument(userID: userID).updateData(dict)
+    //    }
+    //
+    //    func removeMovie(userID: String, movie: Movie) async throws {
+    //        let data: [String : Any?] = [
+    //            DBUser.CodingKeys.favouriteMovie.rawValue: nil
+    //        ]
+    //        try await userDocument(userID: userID).updateData(data as [AnyHashable : Any])
+    //    }
     
 }

@@ -7,6 +7,12 @@
 
 import Foundation
 
+enum Gender: String {
+    case male = "Male"
+    case female = "Female"
+    case other = "Other"
+}
+
 struct DBUser: Codable {
     
     let userId: String
@@ -15,6 +21,15 @@ struct DBUser: Codable {
     let photoUrl: String?
     let dateCreated: Date?
     var isPremium: Bool?
+    var gender: String?
+    var firstName: String?
+    var lastName: String?
+    var dob: Date?
+    var address: String?
+    var finishedOnboarding: Bool?
+    var city: String?
+    var state: String?
+    var zipCode: String?
     
     init(
         userID: String,
@@ -22,7 +37,16 @@ struct DBUser: Codable {
         email: String? = nil,
         photoUrl: String? = nil,
         dateCreated: Date? = nil,
-        isPremium: Bool? = nil
+        isPremium: Bool? = nil,
+        gender: String? = nil,
+        firstName: String? = nil,
+        lastName: String? = nil,
+        dob: Date? = nil,
+        address: String? = nil,
+        finishedOnboarding: Bool? = false,
+        city: String? = nil,
+        state: String? = nil,
+        zipCode: String? = nil
     ) {
         self.userId = userID
         self.email = email
@@ -30,6 +54,15 @@ struct DBUser: Codable {
         self.photoUrl = photoUrl
         self.dateCreated = Date()
         self.isPremium = isPremium
+        self.gender = gender
+        self.firstName = firstName
+        self.lastName = lastName
+        self.dob = dob
+        self.address = address
+        self.finishedOnboarding = finishedOnboarding
+        self.zipCode = zipCode
+        self.state = state
+        self.city = city
     }
     
     init(auth: AuthDataResultModel) {
@@ -39,6 +72,15 @@ struct DBUser: Codable {
         self.photoUrl = auth.photoUrl
         self.dateCreated = Date()
         self.isPremium = false
+        self.gender = nil
+        self.firstName = nil
+        self.lastName = nil
+        self.dob = nil
+        self.address = nil
+        self.finishedOnboarding = false
+        self.zipCode = nil
+        self.state = nil
+        self.city = nil
     }
     
     enum CodingKeys: String, CodingKey {
@@ -48,6 +90,15 @@ struct DBUser: Codable {
         case photoUrl = "photo_url"
         case dateCreated = "date_created"
         case isPremium = "is_premium"
+        case gender = "gender"
+        case firstName = "first_name"
+        case lastName = "last_name"
+        case dob = "date_of_birth"
+        case address = "address"
+        case finishedOnboarding = "finished_onboarding"
+        case zipCode = "zip_code"
+        case state = "state"
+        case city = "city"
     }
     
     init(from decoder: Decoder) throws {
@@ -58,6 +109,15 @@ struct DBUser: Codable {
         self.photoUrl = try container.decodeIfPresent(String.self, forKey: .photoUrl)
         self.dateCreated = try container.decodeIfPresent(Date.self, forKey: .dateCreated)
         self.isPremium = try container.decodeIfPresent(Bool.self, forKey: .isPremium)
+        self.gender = try container.decodeIfPresent(String.self, forKey: .gender)
+        self.firstName = try container.decodeIfPresent(String.self, forKey: .firstName)
+        self.lastName = try container.decodeIfPresent(String.self, forKey: .lastName)
+        self.dob = try container.decodeIfPresent(Date.self, forKey: .dob)
+        self.address = try container.decodeIfPresent(String.self, forKey: .address)
+        self.finishedOnboarding = try container.decodeIfPresent(Bool.self, forKey: .finishedOnboarding)
+        self.state = try container.decodeIfPresent(String.self, forKey: .state)
+        self.city = try container.decodeIfPresent(String.self, forKey: .city)
+        self.zipCode = try container.decodeIfPresent(String.self, forKey: .zipCode)
     }
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
@@ -67,5 +127,14 @@ struct DBUser: Codable {
         try container.encodeIfPresent(self.isPremium, forKey: .isPremium)
         try container.encodeIfPresent(self.photoUrl, forKey: .photoUrl)
         try container.encodeIfPresent(self.dateCreated, forKey: .dateCreated)
+        try container.encodeIfPresent(self.gender, forKey: .gender)
+        try container.encodeIfPresent(self.firstName, forKey: .firstName)
+        try container.encodeIfPresent(self.lastName, forKey: .lastName)
+        try container.encodeIfPresent(self.dob, forKey: .dob)
+        try container.encodeIfPresent(self.address, forKey: .address)
+        try container.encodeIfPresent(self.finishedOnboarding, forKey: .finishedOnboarding)
+        try container.encodeIfPresent(self.state, forKey: .state)
+        try container.encodeIfPresent(self.zipCode, forKey: .zipCode)
+        try container.encodeIfPresent(self.city, forKey: .city)
     }
 }
