@@ -13,9 +13,13 @@ struct TextFieldReusable: View {
     @Binding var showIconOverlay: Bool
     var hintText: String
     var iconString: String? = ""
+    var textCase: UIKeyboardType = .emailAddress
     
     var body: some View {
         TextField(hintText, text: $textBinding)
+            .textInputAutocapitalization(.never)
+            .keyboardType(textCase)
+            .textCase(.lowercase)
             .frame(height: 50)
             .padding(.horizontal)
             .background(Color(.systemGray6))

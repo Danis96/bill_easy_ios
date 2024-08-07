@@ -31,6 +31,7 @@ struct ButtonWideReusable: View {
                 }
                 .padding(.horizontal)
                 .foregroundStyle(.black)
+                .fontWeight(.semibold)
                 .frame(width: buttonWidth, height: 50)
                 .background(Color.yellow)
                 .clipShape(RoundedCornersCustom(tl: 10, tr: 0, bl: 10, br: 0))
@@ -41,6 +42,5 @@ struct ButtonWideReusable: View {
 
 #Preview {
     ButtonWideReusable(buttonTitle: "Login", iconTrailing: "arrow.right") {
-        
     }
 }

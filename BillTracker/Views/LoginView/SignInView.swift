@@ -11,16 +11,13 @@ import SwiftfulRouting
 
 struct SignInView: View {
     
-    @State private var textEmailString: String = ""
-    @State private var textPassString: String = ""
-    @State private var togglePassword: Bool = true
-    
+    @EnvironmentObject var authenticationVM: AuthenticationViewModel
     @Environment(\.router) var router
     
     var body: some View {
-        VStack() {
+        VStack {
             VStack(alignment: .leading) {
-                spacerHeight(height: 40)
+                spacerHeight(height: 40, foregroundStyle: nil)
                 headlineView
                 Rectangle()
                     .frame(height: 30)
@@ -32,11 +29,11 @@ struct SignInView: View {
                 }
             }
             .padding(.horizontal, 20)
-            spacerHeight(height: 20)
-            ButtonWideReusable(buttonTitle: "Login", iconTrailing: "arrow.right",  buttonWidth: 350) {
-                
+            spacerHeight(height: 20, foregroundStyle: nil)
+            ButtonWideReusable(buttonTitle: TextLocalizationUtility.login_button_title, iconTrailing: "arrow.right",  buttonWidth: 350) {
+                await signInEmailPassword()
             }
-            spacerHeight(height: 25)
+            spacerHeight(height: 25, foregroundStyle: nil)
             socialMediaTextDivider
             VStack {
                 googleSignInButtonView
@@ -45,9 +42,10 @@ struct SignInView: View {
             .padding(.horizontal, 20)
             Spacer()
         }
+        .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
-              toolbarItemNavigationSignUpView
+                toolbarItemNavigationSignUpView
             }
         }
     }
@@ -57,7 +55,7 @@ struct SignInView: View {
 extension SignInView {
     private var headlineView: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(TextLocalizationUtility.logn_headline)
+            Text(TextLocalizationUtility.login_headline)
                 .font(.largeTitle)
                 .bold()
             Text(TextLocalizationUtility.login_subheadline)
@@ -67,7 +65,7 @@ extension SignInView {
     private var toolbarItemNavigationSignUpView: some View {
         Button(action: {
             router.showScreen(.push) { _ in
-                SignUpView()
+                RouteGenerator.shared.getRoute(route: .SignUp)
             }
         }, label: {
             Text(TextLocalizationUtility.login_toolbar_trailing)
@@ -78,17 +76,18 @@ extension SignInView {
     }
     
     private var textFieldEmailView: some View {
-        TextFieldReusable(textBinding: $textEmailString, showIconOverlay: .constant(false), hintText: TextLocalizationUtility.login_email_hint)
+        TextFieldReusable(textBinding: $authenticationVM.email, showIconOverlay: .constant(false), hintText: TextLocalizationUtility.login_email_hint)
     }
     
     private var textFieldPasswordView: some View {
-        TextFieldPasswordReusable(textBinding: $textPassString, isSecure: $togglePassword, hintText: TextLocalizationUtility.login_password_hint)
+        TextFieldPasswordReusable(textBinding: $authenticationVM.password, isSecure: $authenticationVM.togglePassword, hintText: TextLocalizationUtility.login_password_hint)
     }
     
     private var forgotPasswordComponentView: some View {
-        
         Button(action: {
-//            router.showScreen(.push, destination: )
+            router.showScreen(.push) { _ in
+                RouteGenerator.shared.getRoute(route: .ForgotPassword)
+            }
         }, label: {
             Text(TextLocalizationUtility.login_forgot_password)
                 .font(.subheadline)
@@ -98,31 +97,34 @@ extension SignInView {
     }
     
     private var socialMediaTextDivider: some View {
-        Text("or login with social account")
+        Text(TextLocalizationUtility.login_social_account)
             .font(.subheadline)
     }
-
+    
     private var googleSignInButtonView: some View {
-        GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .dark, style: .wide, state: .normal)) {
-//            Task {
-//                do {
-//                  
-//                } catch {
-//                    print(error)
-//                }
-//            }
+        GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .dark, style: .wide, state: .normal))  {
+            Task {
+                do {
+                    try await authenticationVM.signInGoogle()
+                    router.showScreen(.push) { _ in
+                        RouteGenerator.shared.getRoute(route: .Success)
+                    }
+                } catch {
+                    print(error)
+                }
+            }
         }
     }
     
     private var appleSignInButtonView: some View {
         Button(action: {
-//            Task {
-//                do {
-//                   
-//                } catch {
-//                    print(error)
-//                }
-//            }
+            //            Task {
+            //                do {
+            //
+            //                } catch {
+            //                    print(error)
+            //                }
+            //            }
         }, label: {
             SignInWithAppleButtonViewRepresentable(type: .signIn, style: .black)
                 .allowsHitTesting(false)
@@ -131,8 +133,30 @@ extension SignInView {
     }
 }
 
+extension SignInView {
+    private func signInEmailPassword() async {
+        Task {
+            do {
+                var error: String? = try await authenticationVM.signIn()
+                
+                if let error = error {
+                    router.showBasicAlert(text: error)
+                } else {
+                    router.showScreen(.push) { _ in
+                        RouteGenerator.shared.getRoute(route: .Success)
+                    }
+                }
+            } catch {
+                print("Catch Sign Up View: \(error)")
+            }
+        }
+    }
+    
+}
+
 #Preview {
     RouterView { _ in
         SignInView()
+            .environmentObject(AuthenticationViewModel())
     }
 }

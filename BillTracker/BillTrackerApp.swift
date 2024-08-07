@@ -13,12 +13,14 @@ import SwiftfulRouting
 struct BillTrackerApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject private var authenticationVM = AuthenticationViewModel()
     
     var body: some Scene {
         WindowGroup {
             RouterView { _ in
-                SignInView()
+               RootView()
             }
+            .environmentObject(authenticationVM)
         }
     }
 }
