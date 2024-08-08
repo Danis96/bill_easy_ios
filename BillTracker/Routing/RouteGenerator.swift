@@ -36,7 +36,7 @@ class RouteGenerator {
             case .Home:
                 return AnyView(HomeView())
             case .Onboarding:
-                return AnyView(Text("Onboarding"))
+                return AnyView(OnboardingView())
             case .ForgotPassword:
                 return AnyView(ForgotPasswordView())
         }

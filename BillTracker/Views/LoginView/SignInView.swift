@@ -12,12 +12,12 @@ import SwiftfulRouting
 struct SignInView: View {
     
     @EnvironmentObject var authenticationVM: AuthenticationViewModel
+    @EnvironmentObject var onboardingVM: OnboardingViewModel
     @Environment(\.router) var router
     
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                spacerHeight(height: 40, foregroundStyle: nil)
                 headlineView
                 Rectangle()
                     .frame(height: 30)
@@ -43,6 +43,7 @@ struct SignInView: View {
             Spacer()
         }
         .navigationBarBackButtonHidden(true)
+        .navigationTitle(TextLocalizationUtility.login_headline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 toolbarItemNavigationSignUpView
@@ -55,9 +56,6 @@ struct SignInView: View {
 extension SignInView {
     private var headlineView: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(TextLocalizationUtility.login_headline)
-                .font(.largeTitle)
-                .bold()
             Text(TextLocalizationUtility.login_subheadline)
         }
     }
@@ -137,13 +135,19 @@ extension SignInView {
     private func signInEmailPassword() async {
         Task {
             do {
-                var error: String? = try await authenticationVM.signIn()
-                
+                let error: String? = try await authenticationVM.signIn()
                 if let error = error {
                     router.showBasicAlert(text: error)
                 } else {
-                    router.showScreen(.push) { _ in
-                        RouteGenerator.shared.getRoute(route: .Success)
+                    try await onboardingVM.loadCurrentUser()
+                    if onboardingVM.user?.finishedOnboarding == true {
+                        router.showScreen(.push) { _ in
+                            RouteGenerator.shared.getRoute(route: .Success)
+                        }
+                    } else {
+                        router.showScreen(.push) { _ in
+                            RouteGenerator.shared.getRoute(route: .Welcome)
+                        }
                     }
                 }
             } catch {
@@ -158,5 +162,6 @@ extension SignInView {
     RouterView { _ in
         SignInView()
             .environmentObject(AuthenticationViewModel())
+            .environmentObject(OnboardingViewModel())
     }
 }

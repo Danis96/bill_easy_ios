@@ -28,12 +28,17 @@ final class OnboardingViewModel: ObservableObject {
         self.user = try await UserManager.instance.getUser(userID: authDataResult.uuid)
     }
     
-    func setUserOnboardingData() -> String? {
-        guard let user = user else { return "No user found" }
+    func setUserOnboardingData() async -> String? {
+        do {
+            try await loadCurrentUser()
+        } catch {
+            return error.localizedDescription
+        }
         if checkMandatoryData() {
+            await collectUserData()
+            guard let user = user else { return "No user found" }
             Task {
-                await collectUserData()
-                try await UserManager.instance.updateUserData(userID: user.userId, user: user)
+                try await UserManager.instance.updateUserData(user: user)
                 self.user = try await UserManager.instance.getUser(userID: user.userId)
             }
             return nil
@@ -44,21 +49,13 @@ final class OnboardingViewModel: ObservableObject {
     }
     
     func collectUserData() async {
-        guard var user = user else { return }
-        user.address = address
-        user.firstName = firstName
-        user.lastName = lastName
-        user.finishedOnboarding = true
-        user.gender = selectedGender?.rawValue ?? Gender.male.rawValue
-        user.dob = dob
-        user.city = city
-        user.state = state
-        user.zipCode = zip
+        guard let userValue = user else { return }
+        self.user = userValue.updateOnboardingData(addressValue: address, fnValue: firstName, lnValue: lastName, stateValue: state, zipValue: zip, cityValue: city, dobValue: dob, genderValue: selectedGender?.rawValue ?? "")
+        print("Finished: ")
+        print("User: \(self.user)")
     }
     
     func checkMandatoryData() -> Bool {
         return !firstName.isEmpty && !lastName.isEmpty && !address.isEmpty && selectedGender != nil && dob != Date.now
     }
-    
-    
 }

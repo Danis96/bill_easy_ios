@@ -51,15 +51,16 @@ extension SuccessView {
     
     private var buttonContinue: some View {
         ButtonReusable(buttonTitle: TextLocalizationUtility.success_button) {
-//            if authenticationVM.authUser?.isAnonimous == true {
+            authenticationVM.loadAuthUser()
+            if authenticationVM.authUser?.isAnonimous == true {
                 router.showScreen(.push) { _ in
                     RouteGenerator.shared.getRoute(route: .Home)
                 }
-//            } else {
-//                router.showScreen(.push) { _ in
-//                    RouteGenerator.shared.getRoute(route: .Onboarding)
-//                }
-//            }
+            } else {
+                router.showScreen(.push) { _ in
+                    RouteGenerator.shared.getRoute(route: .Onboarding)
+                }
+            }
         }
     }
 }

@@ -17,7 +17,6 @@ struct SignUpView: View {
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
-                spacerHeight(height: 40, foregroundStyle: nil)
                 headlineView
                 Rectangle()
                     .frame(height: 30)
@@ -47,6 +46,7 @@ struct SignUpView: View {
             termsAndConditions
         }
         .navigationBarBackButtonHidden(true)
+        .navigationTitle(TextLocalizationUtility.reg_headline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {
                 toolbarItemNavigationSignUpView
@@ -59,9 +59,6 @@ struct SignUpView: View {
 extension SignUpView {
     private var headlineView: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(TextLocalizationUtility.reg_headline)
-                .font(.largeTitle)
-                .bold()
             Text(TextLocalizationUtility.reg_subheadline)
         }
     }

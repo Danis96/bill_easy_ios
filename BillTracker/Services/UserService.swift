@@ -35,20 +35,13 @@ final class UserManager {
     }
     
     func getUser(userID: String) async throws -> DBUser {
-        try await userDocument(userID: userID).getDocument(as: DBUser.self)
+        print(userID)
+        return try await userDocument(userID: userID).getDocument(as: DBUser.self)
     }
     
-    func updateUserData(userID: String, user: DBUser) async throws {
-        
-        let dict: [String : Any] = [
-            DBUser.CodingKeys.firstName.rawValue: user.firstName ?? "",
-            DBUser.CodingKeys.lastName.rawValue: user.lastName ?? "",
-            DBUser.CodingKeys.address.rawValue: user.address ?? "",
-            DBUser.CodingKeys.finishedOnboarding.rawValue: user.finishedOnboarding ?? true,
-            DBUser.CodingKeys.dob.rawValue: user.dob,
-            DBUser.CodingKeys.gender.rawValue: user.gender ?? 0
-        ]
-        try await userDocument(userID: userID).updateData(dict)
+    func updateUserData(user: DBUser) async throws {
+        print(user)
+        try userDocument(userID: user.userId).setData(from: user, merge: true)
     }
     //
     //    func addUserPreferences(userID: String, preference: String) async throws {

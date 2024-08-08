@@ -11,6 +11,7 @@ import SwiftfulRouting
 struct HomeView: View {
     
     @EnvironmentObject var authenticationVM: AuthenticationViewModel
+    @EnvironmentObject var onboardingVM: OnboardingViewModel
     @Environment(\.router) var router
     @Environment(\.dismiss) var dismiss
     
@@ -36,10 +37,18 @@ struct HomeView: View {
                 linkSection
             }
             
+            Text(onboardingVM.user?.address ?? "")
+            Text(onboardingVM.user?.city ?? "")
+            
         }
         .onAppear {
             authenticationVM.loadAuthProviders()
             authenticationVM.loadAuthUser()
+            
+            Task {
+               try await onboardingVM.loadCurrentUser()
+            }
+            
             if authenticationVM.authUser?.isAnonimous == true {
                 router.showResizableSheet(
                     sheetDetents: [.medium, .large],
@@ -133,12 +142,8 @@ extension HomeView {
 
 #Preview {
     RouterView { _ in
-        SuccessView()
+        HomeView()
             .environmentObject(AuthenticationViewModel())
+            .environmentObject(OnboardingViewModel())
     }
-}
-
-
-#Preview {
-    HomeView()
 }

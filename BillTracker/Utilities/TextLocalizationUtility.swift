@@ -41,4 +41,21 @@ class TextLocalizationUtility {
     static var fp_subheadline: String = "Please enter your email below to recieve your password reset instructions."
     static var fp_email_hint: String = "email"
     static var fp_button_title: String = "Send Email"
+
+    // Onboarding View
+    static var ob_headline: String = "Onboarding"
+    static var ob_subheadline: String = "Easily manage and track all your bills in one place, ensuring you never miss a payment.\nPlease fill in the mandatory fields to get started and take control of your finances today."
+    static var ob_fn_hint: String = "first name"
+    static var ob_ln_hint: String = "last name"
+    static var ob_address_hint: String = "address"
+    static var ob_gender_male_hint: String = "male"
+    static var ob_gender_female_hint: String = "female"
+    static var ob_gender_other_hint: String = "other"
+    static var ob_dob_hint: String = "date of birth"
+    static var ob_city_hint: String = "city"
+    static var ob_zip_hint: String = "zip code"
+    static var ob_state_hint: String = "state"
+    static var ob_optional_data: String = "Optional data"
+    static var ob_mandatory_data: String = "Mandatory data"
+    static var ob_button_title: String = "Continue"
 }

@@ -15,14 +15,13 @@ struct ForgotPasswordView: View {
     
     var body: some View {
         VStack {
-            spacerHeight(height: 40, foregroundStyle: nil)
             headline
             spacerHeight(height: 30, foregroundStyle: nil)
             textFieldEmailView
             spacerHeight(height: 10, foregroundStyle: nil)
             buttonSendEmail
             Spacer()
-        }
+        }.navigationTitle("Forgot Password")
     }
 }
 
@@ -30,9 +29,6 @@ extension ForgotPasswordView {
     
     private var headline: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Text(TextLocalizationUtility.fp_headline)
-                .font(.largeTitle)
-                .bold()
             Text(TextLocalizationUtility.fp_subheadline)
                 .foregroundStyle(.black.opacity(0.7))
         }
