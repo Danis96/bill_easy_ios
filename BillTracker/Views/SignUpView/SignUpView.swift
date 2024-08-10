@@ -16,34 +16,38 @@ struct SignUpView: View {
     
     var body: some View {
         VStack {
-            VStack(alignment: .leading) {
-                headlineView
-                Rectangle()
-                    .frame(height: 30)
-                    .foregroundStyle(.windowBackground)
-                VStack(alignment: .trailing, spacing: 10) {
-                    textFieldEmailView
-                    textFieldPasswordView
+            if authenticationVM.isLoading {
+                ProgressLoaderReusable()
+            } else {
+                VStack(alignment: .leading) {
+                    headlineView
+                    Rectangle()
+                        .frame(height: 30)
+                        .foregroundStyle(.windowBackground)
+                    VStack(alignment: .trailing, spacing: 10) {
+                        textFieldEmailView
+                        textFieldPasswordView
+                    }
                 }
-            }
-            .padding(.horizontal, 20)
-            spacerHeight(height: 20, foregroundStyle: nil)
-            HStack {
+                .padding(.horizontal, 20)
+                spacerHeight(height: 20, foregroundStyle: nil)
+                HStack {
+                    Spacer()
+                    anonymousButton
+                    ButtonWideReusable(buttonTitle: TextLocalizationUtility.reg_button_title, iconTrailing: "arrow.right",  buttonWidth: 300) {
+                        signUpEmailPassword()
+                    }
+                }
+                spacerHeight(height: 25, foregroundStyle: nil)
+                socialMediaTextDivider
+                VStack {
+                    googleSignInButtonView
+                    appleSignInButtonView
+                }
+                .padding(.horizontal, 20)
                 Spacer()
-                anonymousButton
-                ButtonWideReusable(buttonTitle: TextLocalizationUtility.reg_button_title, iconTrailing: "arrow.right",  buttonWidth: 300) {
-                   await signUpEmailPassword()
-                }
+                termsAndConditions
             }
-            spacerHeight(height: 25, foregroundStyle: nil)
-            socialMediaTextDivider
-            VStack {
-                googleSignInButtonView
-                appleSignInButtonView
-            }
-            .padding(.horizontal, 20)
-            Spacer()
-            termsAndConditions
         }
         .navigationBarBackButtonHidden(true)
         .navigationTitle(TextLocalizationUtility.reg_headline)
@@ -91,16 +95,7 @@ extension SignUpView {
     
     private var googleSignInButtonView: some View {
         GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .dark, style: .wide, state: .normal)) {
-            Task {
-                do {
-                    try await authenticationVM.signInGoogle()
-                    router.showScreen(.push) { _ in
-                        RouteGenerator.shared.getRoute(route: .Success)
-                    }
-                } catch {
-                    print(error)
-                }
-            }
+            signUpGoogle()
         }
     }
     
@@ -122,16 +117,7 @@ extension SignUpView {
     
     private var anonymousButton: some View {
         Button(action: {
-            Task {
-                do {
-                    try await authenticationVM.signInWithAnonymous()
-                    router.showScreen(.push) { _ in
-                        RouteGenerator.shared.getRoute(route: .Success)
-                    }
-                } catch {
-                    print(error)
-                }
-            }
+            signUpAnonymous()
         }, label: {
             Image(systemName: "person.fill.and.arrow.left.and.arrow.right")
                 .foregroundStyle(.white)
@@ -153,20 +139,49 @@ extension SignUpView {
 }
 
 extension SignUpView {
-    private func signUpEmailPassword() async {
+    private func signUpEmailPassword() {
+        authenticationVM.setLoading(value: true)
         Task {
             do {
-                var error: String? = try await authenticationVM.signUp()
-                
-                if let error = error {
-                    router.showBasicAlert(text: error)
-                } else {
-                    router.showScreen(.push) { _ in
-                        RouteGenerator.shared.getRoute(route: .Success)
-                    }
+                try await authenticationVM.signUp()
+                authenticationVM.setLoading(value: false)
+                router.showScreen(.push) { _ in
+                    RouteGenerator.shared.getRoute(route: .Success)
                 }
             } catch {
-               print("Catch Sign Up View")
+                print("Catch Sign Up View")
+                router.showBasicAlert(text: error.localizedDescription)
+            }
+        }
+    }
+    
+    private func signUpAnonymous() {
+        authenticationVM.setLoading(value: true)
+        Task {
+            do {
+                try await authenticationVM.signInWithAnonymous()
+                authenticationVM.setLoading(value: false)
+                router.showScreen(.push) { _ in
+                    RouteGenerator.shared.getRoute(route: .Success)
+                }
+            } catch {
+                print(error)
+                router.showBasicAlert(text: error.localizedDescription)
+            }
+        }
+    }
+    
+    private func signUpGoogle() {
+        authenticationVM.setLoading(value: true)
+        Task {
+            do {
+                try await authenticationVM.signInGoogle()
+                authenticationVM.setLoading(value: false)
+                router.showScreen(.push) { _ in
+                    RouteGenerator.shared.getRoute(route: .Success)
+                }
+            } catch {
+                router.showBasicAlert(text: error.localizedDescription)
             }
         }
     }

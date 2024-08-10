@@ -42,6 +42,10 @@
 		43C4670D2C63781C00D335E4 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C4670C2C63781C00D335E4 /* OnboardingView.swift */; };
 		43C4670F2C63786500D335E4 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C4670E2C63786500D335E4 /* OnboardingViewModel.swift */; };
 		43C467112C638D8100D335E4 /* RadioButtonReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C467102C638D8100D335E4 /* RadioButtonReusable.swift */; };
+		43C467172C66B77900D335E4 /* PulsingLoaderReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C467162C66B77900D335E4 /* PulsingLoaderReusable.swift */; };
+		43C467192C66BA8400D335E4 /* CircularLoaderReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C467182C66BA8400D335E4 /* CircularLoaderReusable.swift */; };
+		43C4671B2C66C62000D335E4 /* ProgressLoaderReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C4671A2C66C62000D335E4 /* ProgressLoaderReusable.swift */; };
+		43C4671D2C66CEC900D335E4 /* ErrorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C4671C2C66CEC900D335E4 /* ErrorHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +79,10 @@
 		43C4670C2C63781C00D335E4 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		43C4670E2C63786500D335E4 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		43C467102C638D8100D335E4 /* RadioButtonReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadioButtonReusable.swift; sourceTree = "<group>"; };
+		43C467162C66B77900D335E4 /* PulsingLoaderReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulsingLoaderReusable.swift; sourceTree = "<group>"; };
+		43C467182C66BA8400D335E4 /* CircularLoaderReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularLoaderReusable.swift; sourceTree = "<group>"; };
+		43C4671A2C66C62000D335E4 /* ProgressLoaderReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressLoaderReusable.swift; sourceTree = "<group>"; };
+		43C4671C2C66CEC900D335E4 /* ErrorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +191,7 @@
 		435195B72C4AF99700758018 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				43C467152C66B75A00D335E4 /* Loaders */,
 				43C466E12C60189E00D335E4 /* Buttons */,
 				43C466DA2C5FF57600D335E4 /* TextFields */,
 			);
@@ -212,6 +221,7 @@
 				43C466E62C601F7B00D335E4 /* AppleSignInHelper.swift */,
 				435195C42C4AFBA700758018 /* GoogleSignInHelper.swift */,
 				43C466E42C6019D300D335E4 /* UIHelpers.swift */,
+				43C4671C2C66CEC900D335E4 /* ErrorHelper.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -289,6 +299,16 @@
 				43C4670C2C63781C00D335E4 /* OnboardingView.swift */,
 			);
 			path = OnboardingView;
+			sourceTree = "<group>";
+		};
+		43C467152C66B75A00D335E4 /* Loaders */ = {
+			isa = PBXGroup;
+			children = (
+				43C467162C66B77900D335E4 /* PulsingLoaderReusable.swift */,
+				43C467182C66BA8400D335E4 /* CircularLoaderReusable.swift */,
+				43C4671A2C66C62000D335E4 /* ProgressLoaderReusable.swift */,
+			);
+			path = Loaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -376,6 +396,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43C467192C66BA8400D335E4 /* CircularLoaderReusable.swift in Sources */,
 				435195BD2C4AFA3D00758018 /* Utilities.swift in Sources */,
 				43C466D92C5FF10300D335E4 /* SignInView.swift in Sources */,
 				435195C02C4AFA9600758018 /* PreviewProvider.swift in Sources */,
@@ -385,6 +406,7 @@
 				4351956C2C4AF2EB00758018 /* BillTrackerApp.swift in Sources */,
 				43C466E02C5FF78000D335E4 /* TextFieldPasswordReusable.swift in Sources */,
 				43C466FA2C62060700D335E4 /* SuccessView.swift in Sources */,
+				43C4671B2C66C62000D335E4 /* ProgressLoaderReusable.swift in Sources */,
 				43C466DE2C5FF6E700D335E4 /* TextLocalizationUtility.swift in Sources */,
 				43C466E72C601F7B00D335E4 /* AppleSignInHelper.swift in Sources */,
 				43C466E32C6018B300D335E4 /* ButtonWideReusable.swift in Sources */,
@@ -395,11 +417,13 @@
 				43C467112C638D8100D335E4 /* RadioButtonReusable.swift in Sources */,
 				435195C52C4AFBA700758018 /* GoogleSignInHelper.swift in Sources */,
 				43C466DC2C5FF58A00D335E4 /* TextFieldReusable.swift in Sources */,
+				43C467172C66B77900D335E4 /* PulsingLoaderReusable.swift in Sources */,
 				435195C22C4AFB2900758018 /* AuthenticationService.swift in Sources */,
 				43C4670F2C63786500D335E4 /* OnboardingViewModel.swift in Sources */,
 				43C466F72C61FF2800D335E4 /* UserModel.swift in Sources */,
 				43C467032C628AE800D335E4 /* ButtonReusable.swift in Sources */,
 				43C4670D2C63781C00D335E4 /* OnboardingView.swift in Sources */,
+				43C4671D2C66CEC900D335E4 /* ErrorHelper.swift in Sources */,
 				43C466F52C61FE9700D335E4 /* UserService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

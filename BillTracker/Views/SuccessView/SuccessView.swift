@@ -22,6 +22,7 @@ struct SuccessView: View {
             buttonContinue
             Spacer()
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
@@ -51,15 +52,21 @@ extension SuccessView {
     
     private var buttonContinue: some View {
         ButtonReusable(buttonTitle: TextLocalizationUtility.success_button) {
-            authenticationVM.loadAuthUser()
-            if authenticationVM.authUser?.isAnonimous == true {
-                router.showScreen(.push) { _ in
-                    RouteGenerator.shared.getRoute(route: .Home)
-                }
-            } else {
-                router.showScreen(.push) { _ in
-                    RouteGenerator.shared.getRoute(route: .Onboarding)
-                }
+        
+        }
+    }
+}
+
+extension SuccessView {
+    private func checkAndNavigate() {
+        authenticationVM.loadAuthUser()
+        if authenticationVM.authUser?.isAnonimous == true {
+            router.showScreen(.push) { _ in
+                RouteGenerator.shared.getRoute(route: .Home)
+            }
+        } else {
+            router.showScreen(.push) { _ in
+                RouteGenerator.shared.getRoute(route: .Onboarding)
             }
         }
     }

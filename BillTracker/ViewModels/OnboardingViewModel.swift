@@ -6,12 +6,13 @@
 //
 
 import Foundation
-
+import SwiftUI
 
 @MainActor
 final class OnboardingViewModel: ObservableObject {
     
     @Published private(set) var user: DBUser? = nil
+    @Published var isLoading: Bool = false
     
     // Text Fields "Controllers"
     @Published var firstName: String = ""
@@ -23,14 +24,20 @@ final class OnboardingViewModel: ObservableObject {
     @Published var city: String = ""
     @Published var zip: String = ""
     
-    func loadCurrentUser() async throws {
-        let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
-        self.user = try await UserManager.instance.getUser(userID: authDataResult.uuid)
+    func loadCurrentUser() async throws -> String? {
+        do {
+            let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
+            self.user = try await UserManager.instance.getUser(userID: authDataResult.uuid)
+            return nil
+        } catch {
+            return error.localizedDescription
+        }
+        
     }
     
     func setUserOnboardingData() async -> String? {
         do {
-            try await loadCurrentUser()
+           let value = try await loadCurrentUser()
         } catch {
             return error.localizedDescription
         }
@@ -52,7 +59,13 @@ final class OnboardingViewModel: ObservableObject {
         guard let userValue = user else { return }
         self.user = userValue.updateOnboardingData(addressValue: address, fnValue: firstName, lnValue: lastName, stateValue: state, zipValue: zip, cityValue: city, dobValue: dob, genderValue: selectedGender?.rawValue ?? "")
         print("Finished: ")
-        print("User: \(self.user)")
+        print("User: \(self.user ?? DBUser(userID: "Failed"))")
+    }
+    
+    func setLoading(value: Bool) {
+        withAnimation {
+            self.isLoading = value
+        }
     }
     
     func checkMandatoryData() -> Bool {

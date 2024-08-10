@@ -16,14 +16,18 @@ struct OnboardingView: View {
     var body: some View {
         List {
             headline
-            mandatorySection
-            optionalSection
+            if onboardingVM.isLoading {
+                loader
+            } else {
+                mandatorySection
+                optionalSection
+            }
         }
         .navigationTitle(TextLocalizationUtility.ob_headline)
         .navigationBarBackButtonHidden(true)
         .toolbar {
             ToolbarItem(placement: .bottomBar) {
-                contineButton
+                continueButton
             }
         }
     }
@@ -58,13 +62,15 @@ extension OnboardingView {
         }
     }
     
-    private var contineButton: some View {
+    private var continueButton: some View {
         VStack {
             Spacer()
             ButtonReusable(buttonTitle: TextLocalizationUtility.ob_button_title) {
+                onboardingVM.setLoading(value: true)
                 Task {
                     do {
                         let error = await onboardingVM.setUserOnboardingData()
+                        onboardingVM.setLoading(value: false)
                         if let error = error {
                             router.showBasicAlert(text: error)
                         } else {
@@ -91,6 +97,16 @@ extension OnboardingView {
             RadioButtonReusable(selectedGender: $onboardingVM.selectedGender, gender: .other)
         }
         .frame(height: 60)
+    }
+    
+    private var loader: some View {
+        HStack {
+            Spacer()
+            ProgressView("Loading...")
+                .progressViewStyle(CircularProgressViewStyle())
+                .padding()
+            Spacer()
+        }
     }
     
 }

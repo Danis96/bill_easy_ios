@@ -15,12 +15,16 @@ struct ForgotPasswordView: View {
     
     var body: some View {
         VStack {
-            headline
-            spacerHeight(height: 30, foregroundStyle: nil)
-            textFieldEmailView
-            spacerHeight(height: 10, foregroundStyle: nil)
-            buttonSendEmail
-            Spacer()
+            if authenticationVM.isLoading {
+                ProgressLoaderReusable()
+            } else {
+                headline
+                spacerHeight(height: 30, foregroundStyle: nil)
+                textFieldEmailView
+                spacerHeight(height: 10, foregroundStyle: nil)
+                buttonSendEmail
+                Spacer()
+            }
         }.navigationTitle("Forgot Password")
     }
 }
@@ -41,16 +45,24 @@ extension ForgotPasswordView {
     
     private var buttonSendEmail: some View {
         ButtonWideReusable(buttonTitle: TextLocalizationUtility.fp_button_title, iconTrailing: "arrow.right", buttonWidth: 300) {
-            Task {
-                do {
-                    try await authenticationVM.resetPasswordRequest()
-                    router.showScreen(.push) { _ in
-                        RouteGenerator.shared.getRoute(route: .SignIn)
-                    }
-                } catch {
-                    router.showBasicAlert(text: error.localizedDescription)
-                    print("Error")
+           sendResetPasswordEmail()
+        }
+    }
+}
+
+extension ForgotPasswordView {
+    private func sendResetPasswordEmail() {
+        authenticationVM.setLoading(value: true)
+        Task {
+            do {
+                try await authenticationVM.resetPasswordRequest()
+                authenticationVM.setLoading(value: false)
+                router.showScreen(.push) { _ in
+                    RouteGenerator.shared.getRoute(route: .SignIn)
                 }
+            } catch {
+                router.showBasicAlert(text: error.localizedDescription)
+                print("Error")
             }
         }
     }

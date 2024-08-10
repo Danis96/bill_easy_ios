@@ -17,29 +17,33 @@ struct SignInView: View {
     
     var body: some View {
         VStack {
-            VStack(alignment: .leading) {
-                headlineView
-                Rectangle()
-                    .frame(height: 30)
-                    .foregroundStyle(.windowBackground)
-                VStack(alignment: .trailing, spacing: 10) {
-                    textFieldEmailView
-                    forgotPasswordComponentView
-                    textFieldPasswordView
+            if authenticationVM.isLoading {
+                ProgressLoaderReusable()
+            } else {
+                VStack(alignment: .leading) {
+                    headlineView
+                    Rectangle()
+                        .frame(height: 30)
+                        .foregroundStyle(.windowBackground)
+                    VStack(alignment: .trailing, spacing: 10) {
+                        textFieldEmailView
+                        forgotPasswordComponentView
+                        textFieldPasswordView
+                    }
                 }
+                .padding(.horizontal, 20)
+                spacerHeight(height: 20, foregroundStyle: nil)
+                ButtonWideReusable(buttonTitle: TextLocalizationUtility.login_button_title, iconTrailing: "arrow.right",  buttonWidth: 350) {
+                    await signInEmailPassword()
+                }
+                spacerHeight(height: 25, foregroundStyle: nil)
+                socialMediaTextDivider
+                VStack {
+                    googleSignInButtonView
+                    appleSignInButtonView
+                }
+                .padding(.horizontal, 20)
             }
-            .padding(.horizontal, 20)
-            spacerHeight(height: 20, foregroundStyle: nil)
-            ButtonWideReusable(buttonTitle: TextLocalizationUtility.login_button_title, iconTrailing: "arrow.right",  buttonWidth: 350) {
-                await signInEmailPassword()
-            }
-            spacerHeight(height: 25, foregroundStyle: nil)
-            socialMediaTextDivider
-            VStack {
-                googleSignInButtonView
-                appleSignInButtonView
-            }
-            .padding(.horizontal, 20)
             Spacer()
         }
         .navigationBarBackButtonHidden(true)
@@ -101,14 +105,14 @@ extension SignInView {
     
     private var googleSignInButtonView: some View {
         GoogleSignInButton(viewModel: GoogleSignInButtonViewModel(scheme: .dark, style: .wide, state: .normal))  {
+            authenticationVM.setLoading(value: true)
             Task {
                 do {
                     try await authenticationVM.signInGoogle()
-                    router.showScreen(.push) { _ in
-                        RouteGenerator.shared.getRoute(route: .Success)
-                    }
+                    authenticationVM.setLoading(value: false)
+                    try await checkAndNavigate()
                 } catch {
-                    print(error)
+                    router.showBasicAlert(text: error.localizedDescription)
                 }
             }
         }
@@ -133,29 +137,35 @@ extension SignInView {
 
 extension SignInView {
     private func signInEmailPassword() async {
+        authenticationVM.setLoading(value: true)
         Task {
             do {
-                let error: String? = try await authenticationVM.signIn()
-                if let error = error {
-                    router.showBasicAlert(text: error)
-                } else {
-                    try await onboardingVM.loadCurrentUser()
-                    if onboardingVM.user?.finishedOnboarding == true {
-                        router.showScreen(.push) { _ in
-                            RouteGenerator.shared.getRoute(route: .Success)
-                        }
-                    } else {
-                        router.showScreen(.push) { _ in
-                            RouteGenerator.shared.getRoute(route: .Welcome)
-                        }
-                    }
-                }
+                try await authenticationVM.signIn()
+                authenticationVM.setLoading(value: false)
+                try await checkAndNavigate()
             } catch {
                 print("Catch Sign Up View: \(error)")
+                router.showBasicAlert(text: error.localizedDescription)
             }
         }
     }
     
+    private func checkAndNavigate() async throws {
+        let errorLoadUser = try await onboardingVM.loadCurrentUser()
+        if let errorLoad = errorLoadUser {
+            router.showBasicAlert(text: errorLoad)
+        } else {
+            if onboardingVM.user?.finishedOnboarding == true {
+                router.showScreen(.push) { _ in
+                    RouteGenerator.shared.getRoute(route: .Home)
+                }
+            } else {
+                router.showScreen(.push) { _ in
+                    RouteGenerator.shared.getRoute(route: .Onboarding)
+                }
+            }
+        }
+    } 
 }
 
 #Preview {

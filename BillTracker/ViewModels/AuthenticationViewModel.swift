@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 @MainActor
 final class AuthenticationViewModel: ObservableObject {
@@ -19,28 +20,29 @@ final class AuthenticationViewModel: ObservableObject {
     @Published var authUser: AuthDataResultModel? = nil
     @Published var authProviders: [AuthProviderOption] = []
     
-    func signUp() async throws -> String? {
+    @Published var isLoading: Bool = false
+    
+    func signUp() async throws {
         guard !email.isEmpty && !password.isEmpty else {
             print("No data added!")
-            return "Fields are empty!"
+            throw StringError.custom("Fields cannot be empty!")
+            
         }
         let res =  try await AuthenticationManager().createUser(email: email,  password: password)
         let user = DBUser(auth: res)
         try await UserManager.instance.createNewUser(user: user)
         resetTextFields()
         print("Success")
-        return nil
     }
     
-    func signIn() async throws -> String? {
+    func signIn() async throws  {
         guard !email.isEmpty && !password.isEmpty else {
             print("No data added!")
-            return "Fields are empty!"
+            throw StringError.custom("Fields cannot be empty!")
         }
         try await AuthenticationManager().signInUser(email: email,  password: password)
         resetTextFields()
         print("Success Sign in")
-        return nil
     }
     
     func signInGoogle() async throws {
@@ -110,5 +112,11 @@ final class AuthenticationViewModel: ObservableObject {
     func linkEmail() async throws {
         let dataResult = try await AuthenticationManager.shared.linkEmail(email: email, password: password)
         self.authUser = dataResult
+    }
+    
+    func setLoading(value: Bool) {
+        withAnimation {
+            self.isLoading = value
+        }
     }
 }

@@ -15,7 +15,7 @@ struct RootView: View {
     var body: some View {
         ZStack {
             if authenticationVM.userAuthenticated {
-                SuccessView()
+                HomeView()
             } else {
                 SignInView()
             }
