@@ -52,7 +52,7 @@ extension SuccessView {
     
     private var buttonContinue: some View {
         ButtonReusable(buttonTitle: TextLocalizationUtility.success_button) {
-        
+             checkAndNavigate()
         }
     }
 }

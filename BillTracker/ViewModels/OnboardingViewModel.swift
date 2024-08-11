@@ -24,13 +24,12 @@ final class OnboardingViewModel: ObservableObject {
     @Published var city: String = ""
     @Published var zip: String = ""
     
-    func loadCurrentUser() async throws -> String? {
+    func loadCurrentUser() async throws {
         do {
             let authDataResult = try AuthenticationManager.shared.getAuthenticatedUser()
             self.user = try await UserManager.instance.getUser(userID: authDataResult.uuid)
-            return nil
         } catch {
-            return error.localizedDescription
+            print(error)
         }
         
     }
@@ -48,6 +47,7 @@ final class OnboardingViewModel: ObservableObject {
                 try await UserManager.instance.updateUserData(user: user)
                 self.user = try await UserManager.instance.getUser(userID: user.userId)
             }
+            resetFields()
             return nil
         } else {
             return "Mandatory fields cannot be empty!"
@@ -70,5 +70,28 @@ final class OnboardingViewModel: ObservableObject {
     
     func checkMandatoryData() -> Bool {
         return !firstName.isEmpty && !lastName.isEmpty && !address.isEmpty && selectedGender != nil && dob != Date.now
+    }
+    
+    func setAnonymousToExpire() async throws{
+        guard let userValue = user else { return }
+        self.user = userValue.updateAnonymous()
+        guard let user = user else { return }
+        do {
+            try await UserManager.instance.updateUserData(user: user)
+            self.user = try await UserManager.instance.getUser(userID: user.userId)
+        } catch {
+            throw StringError.custom("Anonymous expire: \(error.localizedDescription)")
+        }
+    }
+    
+    func resetFields() {
+        firstName = ""
+        lastName = ""
+        address = ""
+        selectedGender = nil
+        dob = Date.now
+        state = ""
+        city = ""
+        zip = ""
     }
 }

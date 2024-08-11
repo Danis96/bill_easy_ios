@@ -86,6 +86,10 @@ struct DBUser: Codable {
     func updateOnboardingData(addressValue: String,fnValue: String,lnValue: String,stateValue: String, zipValue: String, cityValue: String, dobValue: Date, genderValue: String ) -> DBUser {
         DBUser(userID: userId, isAnonymous: isAnonymous, email: email, photoUrl: photoUrl, dateCreated: dateCreated, isPremium: isPremium, gender: genderValue, firstName: fnValue, lastName: lnValue, dob: dobValue, address: addressValue, finishedOnboarding: true, city: cityValue, state: stateValue, zipCode: zipValue)
     }
+
+    func updateAnonymous() -> DBUser {
+        DBUser(userID: userId, isAnonymous: false, email: email, photoUrl: photoUrl, dateCreated: dateCreated, isPremium: isPremium, gender: gender, firstName: firstName, lastName: lastName, dob: dob, address: address, finishedOnboarding: finishedOnboarding, city: city, state: state, zipCode: zipCode)
+    }
     
     enum CodingKeys: String, CodingKey {
         case userId = "user_id"

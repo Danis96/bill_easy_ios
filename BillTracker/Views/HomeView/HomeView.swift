@@ -101,8 +101,9 @@ extension HomeView {
                 Task {
                     do {
                         try await authenticationVM.linkGoogle()
+                        try await onboardingVM.setAnonymousToExpire()
                     } catch {
-                        print("Error \(error)")
+                        router.showBasicAlert(text: error.localizedDescription)
                     }
                 }
             }, label: {
@@ -128,8 +129,9 @@ extension HomeView {
                     Task {
                         do {
                             try await authenticationVM.linkEmail()
+                            try await onboardingVM.setAnonymousToExpire()
                         } catch {
-                            print("Error \(error)")
+                            router.showBasicAlert(text: error.localizedDescription)
                         }
                     }
                 }, label: {

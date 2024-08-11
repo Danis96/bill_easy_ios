@@ -151,21 +151,22 @@ extension SignInView {
     }
     
     private func checkAndNavigate() async throws {
-        let errorLoadUser = try await onboardingVM.loadCurrentUser()
-        if let errorLoad = errorLoadUser {
-            router.showBasicAlert(text: errorLoad)
+        do {
+            try await onboardingVM.loadCurrentUser()
+        } catch {
+            router.showBasicAlert(text: error.localizedDescription)
+        }
+        
+        if onboardingVM.user?.finishedOnboarding == true {
+            router.showScreen(.push) { _ in
+                RouteGenerator.shared.getRoute(route: .Home)
+            }
         } else {
-            if onboardingVM.user?.finishedOnboarding == true {
-                router.showScreen(.push) { _ in
-                    RouteGenerator.shared.getRoute(route: .Home)
-                }
-            } else {
-                router.showScreen(.push) { _ in
-                    RouteGenerator.shared.getRoute(route: .Onboarding)
-                }
+            router.showScreen(.push) { _ in
+                RouteGenerator.shared.getRoute(route: .Onboarding)
             }
         }
-    } 
+    }
 }
 
 #Preview {
