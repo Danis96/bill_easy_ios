@@ -46,6 +46,8 @@
 		43C467192C66BA8400D335E4 /* CircularLoaderReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C467182C66BA8400D335E4 /* CircularLoaderReusable.swift */; };
 		43C4671B2C66C62000D335E4 /* ProgressLoaderReusable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C4671A2C66C62000D335E4 /* ProgressLoaderReusable.swift */; };
 		43C4671D2C66CEC900D335E4 /* ErrorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C4671C2C66CEC900D335E4 /* ErrorHelper.swift */; };
+		43C4679F2C6B786000D335E4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C4679E2C6B786000D335E4 /* SettingsView.swift */; };
+		43C467A22C6B795600D335E4 /* SettingsItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C467A12C6B795600D335E4 /* SettingsItemCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +85,8 @@
 		43C467182C66BA8400D335E4 /* CircularLoaderReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularLoaderReusable.swift; sourceTree = "<group>"; };
 		43C4671A2C66C62000D335E4 /* ProgressLoaderReusable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressLoaderReusable.swift; sourceTree = "<group>"; };
 		43C4671C2C66CEC900D335E4 /* ErrorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelper.swift; sourceTree = "<group>"; };
+		43C4679E2C6B786000D335E4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		43C467A12C6B795600D335E4 /* SettingsItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemCard.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +156,7 @@
 		435195B32C4AF97D00758018 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				43C4679D2C6B784D00D335E4 /* SettingsView */,
 				43C4670B2C63780C00D335E4 /* OnboardingView */,
 				43C467082C6354CB00D335E4 /* ForgotPasswordView */,
 				43C466FF2C62891A00D335E4 /* HomeView */,
@@ -191,6 +196,7 @@
 		435195B72C4AF99700758018 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				43C467A02C6B793300D335E4 /* SettingsItemCard */,
 				43C467152C66B75A00D335E4 /* Loaders */,
 				43C466E12C60189E00D335E4 /* Buttons */,
 				43C466DA2C5FF57600D335E4 /* TextFields */,
@@ -311,6 +317,22 @@
 			path = Loaders;
 			sourceTree = "<group>";
 		};
+		43C4679D2C6B784D00D335E4 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				43C4679E2C6B786000D335E4 /* SettingsView.swift */,
+			);
+			path = SettingsView;
+			sourceTree = "<group>";
+		};
+		43C467A02C6B793300D335E4 /* SettingsItemCard */ = {
+			isa = PBXGroup;
+			children = (
+				43C467A12C6B795600D335E4 /* SettingsItemCard.swift */,
+			);
+			path = SettingsItemCard;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -411,10 +433,12 @@
 				43C466E72C601F7B00D335E4 /* AppleSignInHelper.swift in Sources */,
 				43C466E32C6018B300D335E4 /* ButtonWideReusable.swift in Sources */,
 				43C4670A2C6354DE00D335E4 /* ForgotPasswordView.swift in Sources */,
+				43C4679F2C6B786000D335E4 /* SettingsView.swift in Sources */,
 				43C467012C62892A00D335E4 /* HomeView.swift in Sources */,
 				43C466EA2C615F7200D335E4 /* SignUpView.swift in Sources */,
 				43C467052C634E3800D335E4 /* RouteGenerator.swift in Sources */,
 				43C467112C638D8100D335E4 /* RadioButtonReusable.swift in Sources */,
+				43C467A22C6B795600D335E4 /* SettingsItemCard.swift in Sources */,
 				435195C52C4AFBA700758018 /* GoogleSignInHelper.swift in Sources */,
 				43C466DC2C5FF58A00D335E4 /* TextFieldReusable.swift in Sources */,
 				43C467172C66B77900D335E4 /* PulsingLoaderReusable.swift in Sources */,

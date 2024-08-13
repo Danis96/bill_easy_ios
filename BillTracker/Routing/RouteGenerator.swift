@@ -16,6 +16,7 @@ enum Routes {
     case Home
     case Onboarding
     case ForgotPassword
+    case Settings
 }
 
 class RouteGenerator {
@@ -39,6 +40,8 @@ class RouteGenerator {
                 return AnyView(OnboardingView())
             case .ForgotPassword:
                 return AnyView(ForgotPasswordView())
+            case .Settings:
+                return AnyView(SettingsView())
         }
     }
 }

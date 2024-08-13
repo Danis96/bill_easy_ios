@@ -59,7 +59,26 @@ struct HomeView: View {
             }
         }
         .navigationBarBackButtonHidden(true)
+        .toolbar(content: {
+            ToolbarItem(placement: .topBarTrailing, content: {
+                settingsToolbarItem
+            })
+        })
     }
+}
+
+extension HomeView {
+    
+    private var settingsToolbarItem: some View {
+        Image(systemName: "gear.circle")
+            .font(.headline)
+            .onTapGesture {
+                router.showScreen(.push) { _ in
+                    RouteGenerator().getRoute(route: .Settings)
+                }
+            }
+    }
+    
 }
 
 extension HomeView {
