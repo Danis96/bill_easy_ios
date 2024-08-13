@@ -48,6 +48,8 @@
 		43C4671D2C66CEC900D335E4 /* ErrorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C4671C2C66CEC900D335E4 /* ErrorHelper.swift */; };
 		43C4679F2C6B786000D335E4 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C4679E2C6B786000D335E4 /* SettingsView.swift */; };
 		43C467A22C6B795600D335E4 /* SettingsItemCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C467A12C6B795600D335E4 /* SettingsItemCard.swift */; };
+		43C467A42C6B858700D335E4 /* SettingsItemModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C467A32C6B858700D335E4 /* SettingsItemModel.swift */; };
+		43C467A82C6BC8E100D335E4 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43C467A72C6BC8E100D335E4 /* SettingsViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +89,8 @@
 		43C4671C2C66CEC900D335E4 /* ErrorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelper.swift; sourceTree = "<group>"; };
 		43C4679E2C6B786000D335E4 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		43C467A12C6B795600D335E4 /* SettingsItemCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemCard.swift; sourceTree = "<group>"; };
+		43C467A32C6B858700D335E4 /* SettingsItemModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsItemModel.swift; sourceTree = "<group>"; };
+		43C467A72C6BC8E100D335E4 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +176,7 @@
 			children = (
 				43C466F12C61FE3600D335E4 /* AuthenticationViewModel.swift */,
 				43C4670E2C63786500D335E4 /* OnboardingViewModel.swift */,
+				43C467A72C6BC8E100D335E4 /* SettingsViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 			isa = PBXGroup;
 			children = (
 				43C467A12C6B795600D335E4 /* SettingsItemCard.swift */,
+				43C467A32C6B858700D335E4 /* SettingsItemModel.swift */,
 			);
 			path = SettingsItemCard;
 			sourceTree = "<group>";
@@ -421,10 +427,12 @@
 				43C467192C66BA8400D335E4 /* CircularLoaderReusable.swift in Sources */,
 				435195BD2C4AFA3D00758018 /* Utilities.swift in Sources */,
 				43C466D92C5FF10300D335E4 /* SignInView.swift in Sources */,
+				43C467A42C6B858700D335E4 /* SettingsItemModel.swift in Sources */,
 				435195C02C4AFA9600758018 /* PreviewProvider.swift in Sources */,
 				43C466E52C6019D300D335E4 /* UIHelpers.swift in Sources */,
 				43C466FC2C62216100D335E4 /* RootView.swift in Sources */,
 				43C466F22C61FE3600D335E4 /* AuthenticationViewModel.swift in Sources */,
+				43C467A82C6BC8E100D335E4 /* SettingsViewModel.swift in Sources */,
 				4351956C2C4AF2EB00758018 /* BillTrackerApp.swift in Sources */,
 				43C466E02C5FF78000D335E4 /* TextFieldPasswordReusable.swift in Sources */,
 				43C466FA2C62060700D335E4 /* SuccessView.swift in Sources */,

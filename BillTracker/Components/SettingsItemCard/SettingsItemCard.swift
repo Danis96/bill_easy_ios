@@ -12,16 +12,24 @@ struct SettingsItemCard: View {
     var isSwitch: Bool = false
     var itemTitle: String
     var itemSubtitle: String
+    var imageName: String
     var onArrowPressed: () -> Void
     @Binding var isToggleOn: Bool
     
     var body: some View {
         RoundedRectangle(cornerRadius: 14)
             .fill(.white)
-            .frame(maxWidth: .infinity, maxHeight: 80)
+            .frame(maxWidth: .infinity, minHeight: 80, maxHeight: 80)
             .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
             .overlay {
                 cardOverlayBody
+            }
+            .onTapGesture {
+                if isSwitch {
+                    print("Is Switch")
+                } else {
+                    onArrowPressed()
+                }
             }
     }
 }
@@ -44,7 +52,10 @@ extension SettingsItemCard {
     }
     
     private var imageSection: some View {
-        Image("settingsPasswordChangeIcon")
+        Image(imageName)
+            .resizable()
+            .scaledToFit()
+            .frame(maxWidth: 45, maxHeight: 50)
     }
     
     private var headlineSection: some View {
@@ -61,9 +72,6 @@ extension SettingsItemCard {
     private var arrowTappable: some View {
         Image(systemName: "arrow.right")
             .foregroundStyle(.blue)
-            .onTapGesture {
-                onArrowPressed()
-            }
     }
     
     private var switchView: some View {
@@ -78,9 +86,10 @@ extension SettingsItemCard {
 
 #Preview {
     SettingsItemCard(
-        isSwitch: false,
+        isSwitch: true,
         itemTitle: "Change password",
         itemSubtitle: "Go and change your password",
+        imageName: "settingsPasswordChangeIcon",
         onArrowPressed: {
             print("On arrow pressed")
         },

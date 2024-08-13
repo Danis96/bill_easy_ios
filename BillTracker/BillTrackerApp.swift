@@ -16,6 +16,7 @@ struct BillTrackerApp: App {
     // MARK: View Models Registration
     @StateObject private var authenticationVM = AuthenticationViewModel()
     @StateObject private var onboardingVM = OnboardingViewModel()
+    @StateObject private var settingsVM = SettingsViewModel()
     
     var body: some Scene {
         WindowGroup {
@@ -24,6 +25,7 @@ struct BillTrackerApp: App {
             }
             .environmentObject(authenticationVM)
             .environmentObject(onboardingVM)
+            .environmentObject(settingsVM)
         }
     }
 }
