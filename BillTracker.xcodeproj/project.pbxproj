@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		434A5CA22C6E20AF0016D361 /* AnonymousLinkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A5CA12C6E20AF0016D361 /* AnonymousLinkingView.swift */; };
+		434A5CA42C6E28980016D361 /* ExpandableContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 434A5CA32C6E28980016D361 /* ExpandableContainerView.swift */; };
 		4351956C2C4AF2EB00758018 /* BillTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4351956B2C4AF2EB00758018 /* BillTrackerApp.swift */; };
 		435195702C4AF2ED00758018 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4351956F2C4AF2ED00758018 /* Assets.xcassets */; };
 		435195732C4AF2ED00758018 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 435195722C4AF2ED00758018 /* Preview Assets.xcassets */; };
@@ -53,6 +55,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		434A5CA12C6E20AF0016D361 /* AnonymousLinkingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnonymousLinkingView.swift; sourceTree = "<group>"; };
+		434A5CA32C6E28980016D361 /* ExpandableContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpandableContainerView.swift; sourceTree = "<group>"; };
 		435195682C4AF2EB00758018 /* BillTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BillTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4351956B2C4AF2EB00758018 /* BillTrackerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BillTrackerApp.swift; sourceTree = "<group>"; };
 		4351956F2C4AF2ED00758018 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -111,6 +115,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		434A5CA02C6E209A0016D361 /* AnonymousLinkingView */ = {
+			isa = PBXGroup;
+			children = (
+				434A5CA12C6E20AF0016D361 /* AnonymousLinkingView.swift */,
+			);
+			path = AnonymousLinkingView;
+			sourceTree = "<group>";
+		};
+		434A5CA52C6E28A30016D361 /* ExpandableContainerView */ = {
+			isa = PBXGroup;
+			children = (
+				434A5CA32C6E28980016D361 /* ExpandableContainerView.swift */,
+			);
+			path = ExpandableContainerView;
+			sourceTree = "<group>";
+		};
 		4351955F2C4AF2EB00758018 = {
 			isa = PBXGroup;
 			children = (
@@ -160,8 +180,8 @@
 		435195B32C4AF97D00758018 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				43C4679D2C6B784D00D335E4 /* SettingsView */,
 				43C4670B2C63780C00D335E4 /* OnboardingView */,
+				43C4679D2C6B784D00D335E4 /* SettingsView */,
 				43C467082C6354CB00D335E4 /* ForgotPasswordView */,
 				43C466FF2C62891A00D335E4 /* HomeView */,
 				43C466F82C6205F900D335E4 /* SuccessView */,
@@ -201,6 +221,7 @@
 		435195B72C4AF99700758018 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				434A5CA52C6E28A30016D361 /* ExpandableContainerView */,
 				43C467A02C6B793300D335E4 /* SettingsItemCard */,
 				43C467152C66B75A00D335E4 /* Loaders */,
 				43C466E12C60189E00D335E4 /* Buttons */,
@@ -326,6 +347,7 @@
 			isa = PBXGroup;
 			children = (
 				43C4679E2C6B786000D335E4 /* SettingsView.swift */,
+				434A5CA02C6E209A0016D361 /* AnonymousLinkingView */,
 			);
 			path = SettingsView;
 			sourceTree = "<group>";
@@ -431,6 +453,7 @@
 				435195C02C4AFA9600758018 /* PreviewProvider.swift in Sources */,
 				43C466E52C6019D300D335E4 /* UIHelpers.swift in Sources */,
 				43C466FC2C62216100D335E4 /* RootView.swift in Sources */,
+				434A5CA42C6E28980016D361 /* ExpandableContainerView.swift in Sources */,
 				43C466F22C61FE3600D335E4 /* AuthenticationViewModel.swift in Sources */,
 				43C467A82C6BC8E100D335E4 /* SettingsViewModel.swift in Sources */,
 				4351956C2C4AF2EB00758018 /* BillTrackerApp.swift in Sources */,
@@ -449,6 +472,7 @@
 				43C467A22C6B795600D335E4 /* SettingsItemCard.swift in Sources */,
 				435195C52C4AFBA700758018 /* GoogleSignInHelper.swift in Sources */,
 				43C466DC2C5FF58A00D335E4 /* TextFieldReusable.swift in Sources */,
+				434A5CA22C6E20AF0016D361 /* AnonymousLinkingView.swift in Sources */,
 				43C467172C66B77900D335E4 /* PulsingLoaderReusable.swift in Sources */,
 				435195C22C4AFB2900758018 /* AuthenticationService.swift in Sources */,
 				43C4670F2C63786500D335E4 /* OnboardingViewModel.swift in Sources */,

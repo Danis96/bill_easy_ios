@@ -32,11 +32,6 @@ struct HomeView: View {
                 Text(provider.rawValue)
             }
             
-            
-            if authenticationVM.authUser?.isAnonimous == true {
-                linkSection
-            }
-            
             Text(onboardingVM.user?.address ?? "")
             Text(onboardingVM.user?.city ?? "")
             
@@ -83,14 +78,6 @@ extension HomeView {
 
 extension HomeView {
     
-    private var textFieldEmailView: some View {
-        TextFieldReusable(textBinding: $authenticationVM.email, showIconOverlay: .constant(false), hintText: TextLocalizationUtility.login_email_hint)
-    }
-    
-    private var textFieldPasswordView: some View {
-        TextFieldPasswordReusable(textBinding: $authenticationVM.password, isSecure: $authenticationVM.togglePassword, hintText: TextLocalizationUtility.login_password_hint)
-    }
-    
     private var anonymousModalWarning: some View {
         ZStack {
             Color.yellow.ignoresSafeArea()
@@ -111,52 +98,6 @@ extension HomeView {
             .padding(.vertical, 30)
             .padding(.horizontal, 30)
             
-        }
-    }
-    
-    private var linkSection: some View {
-        Section("Create account") {
-            Button(action: {
-                Task {
-                    do {
-                        try await authenticationVM.linkGoogle()
-                        try await onboardingVM.setAnonymousToExpire()
-                    } catch {
-                        router.showBasicAlert(text: error.localizedDescription)
-                    }
-                }
-            }, label: {
-                Text("Link Google Account")
-            })
-            
-            Button(action: {
-                Task {
-                    do {
-                        try await authenticationVM.linkApple()
-                    } catch {
-                        print("Error \(error)")
-                    }
-                }
-            }, label: {
-                Text("Link Apple Account")
-            })
-            
-            VStack {
-                textFieldEmailView
-                textFieldPasswordView
-                Button(action: {
-                    Task {
-                        do {
-                            try await authenticationVM.linkEmail()
-                            try await onboardingVM.setAnonymousToExpire()
-                        } catch {
-                            router.showBasicAlert(text: error.localizedDescription)
-                        }
-                    }
-                }, label: {
-                    Text("Link Email Account")
-                }).buttonStyle(.bordered)
-            }
         }
     }
 }

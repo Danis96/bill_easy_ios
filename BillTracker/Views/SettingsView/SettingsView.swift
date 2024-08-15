@@ -11,44 +11,16 @@ import SwiftfulRouting
 struct SettingsView: View {
     
     @EnvironmentObject private var settingsVM: SettingsViewModel
-    
-    // MARK: Settings Section Lists
-    
-    var settingsAnonymousList: [SettingsItemModel] = [
-        SettingsItemModel(itemTitle: "Anonymous", itemSubtitle: "Click here to link profile",
-                          imageName: "settingsAnonymousIcon",
-                          isSwitch: false,
-                          onArrowPressed: {
-                              print("Go to linking profile")
-                          }
-        )
-    ]
-    
-    var settingsPersonalizationList: [SettingsItemModel] = [
-        SettingsItemModel(itemTitle: "Language", itemSubtitle: "Set the app language", imageName: "settingsPasswordChangeIcon", isSwitch: false, onArrowPressed: {
-            print("Go to app language")
-        }),
-        SettingsItemModel(itemTitle: "Edit info", itemSubtitle: "Change user info", imageName: "settingsProfileIcon", isSwitch: false, onArrowPressed: {
-            print("Go to app edit info")
-        }),
-        SettingsItemModel(itemTitle: "Dark mode", itemSubtitle: "Choose a view mode", imageName: "settingsDarkMode", isSwitch: true, onArrowPressed: {})
-    ]
-
-    var settingsNotificationList: [SettingsItemModel] = [
-        SettingsItemModel(itemTitle: "App Notifications", itemSubtitle: "Get push notifications", imageName: "settingsNotIcon", isSwitch: true, onArrowPressed: {
-            print("Go to app language")
-        }),
-        SettingsItemModel(itemTitle: "Notification History", itemSubtitle: "See all notifications", imageName: "settingsNotHistoryIcon", isSwitch: false, onArrowPressed: {
-            print("Go to notification history profile")
-        })
-    ]
+    @Environment(\.router) var router
     
     var body: some View {
         ScrollView {
             Divider()
             VStack(alignment: .leading) {
                 spacerHeight(height: 20, foregroundStyle: nil)
-                anonymousSection
+                if settingsVM.isUserAnonymous() {
+                    anonymousSection
+                }
                 personalizationSection
                 notificationSection
             }
@@ -56,7 +28,49 @@ struct SettingsView: View {
         .padding(20)
         .navigationTitle("Settings")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            Task {
+                await loadUser()
+            }
+        }
         
+    }
+    
+    private func getSettingsAnonymousList() -> [SettingsItemModel] {
+        return [
+            SettingsItemModel(itemTitle: "Anonymous", itemSubtitle: "Click here to link profile",
+                              imageName: "settingsAnonymousIcon",
+                              isSwitch: false,
+                              onArrowPressed: {
+                                  router.showScreen(.push) { _ in
+                                      RouteGenerator.shared.getRoute(route: .AnonymousLinking)
+                                  }
+                              }
+                             )
+        ]
+    }
+    
+    private func getSettingsPersonalizationList() -> [SettingsItemModel] {
+        return [
+            SettingsItemModel(itemTitle: "Language", itemSubtitle: "Set the app language", imageName: "settingsPasswordChangeIcon", isSwitch: false, onArrowPressed: {
+                print("Go to app language")
+            }),
+            SettingsItemModel(itemTitle: "Edit info", itemSubtitle: "Change user info", imageName: "settingsProfileIcon", isSwitch: false, onArrowPressed: {
+                print("Go to app edit info")
+            }),
+            SettingsItemModel(itemTitle: "Dark mode", itemSubtitle: "Choose a view mode", imageName: "settingsDarkMode", isSwitch: true, onArrowPressed: {})
+        ]
+    }
+    
+    private func getSettingsNotificationList() -> [SettingsItemModel] {
+        return [
+            SettingsItemModel(itemTitle: "App Notifications", itemSubtitle: "Get push notifications", imageName: "settingsNotIcon", isSwitch: true, onArrowPressed: {
+                print("Go to app language")
+            }),
+            SettingsItemModel(itemTitle: "Notification History", itemSubtitle: "See all notifications", imageName: "settingsNotHistoryIcon", isSwitch: false, onArrowPressed: {
+                print("Go to notification history profile")
+            })
+        ]
     }
 }
 
@@ -64,11 +78,12 @@ struct SettingsView: View {
 
 extension SettingsView {
     
+    
     private var anonymousSection: some View {
         Section("Anonymous Linking") {
-            ForEach(settingsAnonymousList) { item in
+            ForEach(getSettingsAnonymousList()) { item in
                 SettingsItemCard(
-                    isSwitch: item.isSwitch, 
+                    isSwitch: item.isSwitch,
                     itemTitle: item.itemTitle,
                     itemSubtitle: item.itemSubtitle,
                     imageName: item.imageName,
@@ -82,7 +97,7 @@ extension SettingsView {
     
     private var personalizationSection: some View {
         Section("Personalization") {
-            ForEach(settingsPersonalizationList) { item in
+            ForEach(getSettingsPersonalizationList()) { item in
                 SettingsItemCard(
                     isSwitch: item.isSwitch,
                     itemTitle: item.itemTitle,
@@ -95,10 +110,10 @@ extension SettingsView {
             }
         }
     }
-
+    
     private var notificationSection: some View {
         Section("Notifications") {
-            ForEach(settingsNotificationList) { item in
+            ForEach(getSettingsNotificationList()) { item in
                 SettingsItemCard(
                     isSwitch: item.isSwitch,
                     itemTitle: item.itemTitle,
@@ -115,6 +130,14 @@ extension SettingsView {
 }
 
 extension SettingsView {
+    private func loadUser() async {
+        do {
+            try await settingsVM.loadCurrentUser()
+        } catch {
+            router.showBasicAlert(text: error.localizedDescription)
+        }
+    }
+    
     
 }
 
