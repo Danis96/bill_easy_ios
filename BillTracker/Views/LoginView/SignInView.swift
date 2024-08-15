@@ -146,6 +146,7 @@ extension SignInView {
             } catch {
                 print("Catch Sign Up View: \(error)")
                 router.showBasicAlert(text: error.localizedDescription)
+                authenticationVM.setLoading(value: false)
             }
         }
     }

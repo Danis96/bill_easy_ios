@@ -17,16 +17,6 @@ struct HomeView: View {
     
     var body: some View {
         List {
-            Button(action: {
-                Task {
-                    try authenticationVM.signOut()
-                    router.showScreen(.push) { _ in
-                        SignInView()
-                    }
-                }
-            }, label: {
-                Text("Sign out")
-            })
             
             ForEach(authenticationVM.authProviders, id: \.self ) { provider in
                 Text(provider.rawValue)

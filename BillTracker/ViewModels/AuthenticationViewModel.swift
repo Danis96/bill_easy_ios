@@ -80,6 +80,11 @@ final class AuthenticationViewModel: ObservableObject {
         try AuthenticationManager.shared.signOut()
         print("Success Sign out")
     }
+
+    func deleteUser() async throws {
+        try await AuthenticationManager.shared.deleteUser()
+        print("Success Delete user")
+    }
     
     private func resetTextFields() {
         self.email = ""

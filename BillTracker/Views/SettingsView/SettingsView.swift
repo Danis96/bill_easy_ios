@@ -11,6 +11,7 @@ import SwiftfulRouting
 struct SettingsView: View {
     
     @EnvironmentObject private var settingsVM: SettingsViewModel
+    @EnvironmentObject private var authenticationVM: AuthenticationViewModel
     @Environment(\.router) var router
     
     var body: some View {
@@ -23,10 +24,11 @@ struct SettingsView: View {
                 }
                 personalizationSection
                 notificationSection
+                userManagementSection
             }
         }
         .padding(20)
-        .navigationTitle("Settings")
+        .navigationTitle(TextLocalizationUtility.st_headline)
         .navigationBarTitleDisplayMode(.inline)
         .onAppear {
             Task {
@@ -38,7 +40,7 @@ struct SettingsView: View {
     
     private func getSettingsAnonymousList() -> [SettingsItemModel] {
         return [
-            SettingsItemModel(itemTitle: "Anonymous", itemSubtitle: "Click here to link profile",
+            SettingsItemModel(itemTitle: TextLocalizationUtility.st_anonymous_title, itemSubtitle: TextLocalizationUtility.st_anonymous_subtitle,
                               imageName: "settingsAnonymousIcon",
                               isSwitch: false,
                               onArrowPressed: {
@@ -52,23 +54,48 @@ struct SettingsView: View {
     
     private func getSettingsPersonalizationList() -> [SettingsItemModel] {
         return [
-            SettingsItemModel(itemTitle: "Language", itemSubtitle: "Set the app language", imageName: "settingsPasswordChangeIcon", isSwitch: false, onArrowPressed: {
+            SettingsItemModel(itemTitle: TextLocalizationUtility.st_pers_lang_title, itemSubtitle: TextLocalizationUtility.st_pers_lang_subtitle, imageName: "settingsPasswordChangeIcon", isSwitch: false, onArrowPressed: {
                 print("Go to app language")
             }),
-            SettingsItemModel(itemTitle: "Edit info", itemSubtitle: "Change user info", imageName: "settingsProfileIcon", isSwitch: false, onArrowPressed: {
+            SettingsItemModel(itemTitle: TextLocalizationUtility.st_pers_edit_title, itemSubtitle: TextLocalizationUtility.st_pers_edit_subtitle, imageName: "settingsProfileIcon", isSwitch: false, onArrowPressed: {
                 print("Go to app edit info")
             }),
-            SettingsItemModel(itemTitle: "Dark mode", itemSubtitle: "Choose a view mode", imageName: "settingsDarkMode", isSwitch: true, onArrowPressed: {})
+            SettingsItemModel(itemTitle: TextLocalizationUtility.st_pers_dark_title, itemSubtitle: TextLocalizationUtility.st_pers_dark_subtitle, imageName: "settingsDarkMode", isSwitch: true, onArrowPressed: {})
         ]
     }
     
     private func getSettingsNotificationList() -> [SettingsItemModel] {
         return [
-            SettingsItemModel(itemTitle: "App Notifications", itemSubtitle: "Get push notifications", imageName: "settingsNotIcon", isSwitch: true, onArrowPressed: {
+            SettingsItemModel(itemTitle: TextLocalizationUtility.st_not_app_title, itemSubtitle: TextLocalizationUtility.st_not_app_subtitle, imageName: "settingsNotIcon", isSwitch: true, onArrowPressed: {
                 print("Go to app language")
             }),
-            SettingsItemModel(itemTitle: "Notification History", itemSubtitle: "See all notifications", imageName: "settingsNotHistoryIcon", isSwitch: false, onArrowPressed: {
+            SettingsItemModel(itemTitle: TextLocalizationUtility.st_not_his_title, itemSubtitle: TextLocalizationUtility.st_not_his_subtitle, imageName: "settingsNotHistoryIcon", isSwitch: false, onArrowPressed: {
                 print("Go to notification history profile")
+            })
+        ]
+    }
+    
+    private func getSettingsUserManagementList() -> [SettingsItemModel] {
+        return [
+            SettingsItemModel(itemTitle: "Sign out", itemSubtitle: nil, imageName: "settingsSignOut", isSwitch: false, onArrowPressed: {
+                print("Open sign out modal")
+                
+                Task {
+                    try authenticationVM.signOut()
+                    router.showScreen(.push) { _ in
+                        SignInView()
+                    }
+                }
+                
+            }),
+            SettingsItemModel(itemTitle: "Delete user", itemSubtitle: nil, imageName: "settingsDeleteUser", isSwitch: false, onArrowPressed: {
+                print("Open delete user modal")
+                Task {
+                    try await authenticationVM.deleteUser()
+                    router.showScreen(.push) { _ in
+                        SignInView()
+                    }
+                }
             })
         ]
     }
@@ -80,7 +107,7 @@ extension SettingsView {
     
     
     private var anonymousSection: some View {
-        Section("Anonymous Linking") {
+        Section(TextLocalizationUtility.st_anonymous_section) {
             ForEach(getSettingsAnonymousList()) { item in
                 SettingsItemCard(
                     isSwitch: item.isSwitch,
@@ -96,7 +123,7 @@ extension SettingsView {
     }
     
     private var personalizationSection: some View {
-        Section("Personalization") {
+        Section(TextLocalizationUtility.st_pers_section) {
             ForEach(getSettingsPersonalizationList()) { item in
                 SettingsItemCard(
                     isSwitch: item.isSwitch,
@@ -112,11 +139,27 @@ extension SettingsView {
     }
     
     private var notificationSection: some View {
-        Section("Notifications") {
+        Section(TextLocalizationUtility.st_not_section) {
             ForEach(getSettingsNotificationList()) { item in
                 SettingsItemCard(
                     isSwitch: item.isSwitch,
                     itemTitle: item.itemTitle,
+                    itemSubtitle: item.itemSubtitle,
+                    imageName: item.imageName,
+                    onArrowPressed: item.onArrowPressed,
+                    isToggleOn: $settingsVM.notificationOn
+                )
+                .padding(10)
+            }
+        }
+    }
+    
+    private var userManagementSection: some View {
+        Section("User Management") {
+            ForEach(getSettingsUserManagementList()) { item in
+                SettingsItemCard(
+                    isSwitch: item.isSwitch,
+                    hasIcon: false, itemTitle: item.itemTitle,
                     itemSubtitle: item.itemSubtitle,
                     imageName: item.imageName,
                     onArrowPressed: item.onArrowPressed,

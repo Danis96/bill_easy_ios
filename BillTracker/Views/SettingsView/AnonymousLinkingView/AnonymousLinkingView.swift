@@ -15,16 +15,13 @@ struct AnonymousLinkingView: View {
     @Environment(\.router) var router
     
     var body: some View {
-//        ScrollView {
         VStack {
             ExpandableContainerView(passedView: AnyView(emailSection), containerTitle: "Email linking")
                 .padding()
             List {
-                   
-                    linkSection
+                linkSection
             }
         }
-//        }
     }
 }
 

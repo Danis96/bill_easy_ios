@@ -10,8 +10,9 @@ import SwiftUI
 struct SettingsItemCard: View {
     
     var isSwitch: Bool = false
+    var hasIcon: Bool = true
     var itemTitle: String
-    var itemSubtitle: String
+    var itemSubtitle: String?
     var imageName: String
     var onArrowPressed: () -> Void
     @Binding var isToggleOn: Bool
@@ -43,10 +44,12 @@ extension SettingsItemCard {
                 headlineSection
             }
             Spacer()
-            if isSwitch {
-                switchView
-            } else {
-                arrowTappable
+            if hasIcon {
+                if isSwitch {
+                    switchView
+                } else {
+                    arrowTappable
+                }
             }
         }.padding()
     }
@@ -62,10 +65,12 @@ extension SettingsItemCard {
         VStack(alignment: .leading) {
             Text(itemTitle)
                 .font(.headline)
-            Spacer()
-            Text(itemSubtitle)
-                .font(.subheadline)
-                .foregroundStyle(.black.opacity(0.7))
+            if let subtitle = itemSubtitle {
+                Spacer()
+                Text(subtitle)
+                    .font(.subheadline)
+                    .foregroundStyle(.black.opacity(0.7))
+            }  
         }
     }
     
